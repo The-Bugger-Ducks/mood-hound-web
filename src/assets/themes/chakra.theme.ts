@@ -19,6 +19,11 @@ const chakraTheme = extendTheme({
         colorScheme: "teal",
       },
     },
+    Tabs: {
+      defaultProps: {
+        colorScheme: "teal",
+      },
+    },
   },
 });
 
