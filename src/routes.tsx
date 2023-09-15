@@ -1,7 +1,7 @@
 import RoutesEnum from "./utils/enums/routes.enum";
 
-import Dashboard from "./pages/dashboard";
-import Login from "./pages/login";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
 
 import { BrowserRouter, Route, Routes as RoutesDom } from "react-router-dom";
 
