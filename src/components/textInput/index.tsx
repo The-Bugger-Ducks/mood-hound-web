@@ -48,7 +48,7 @@ const TextInput: FC<TextInputProps> = ({
     >
       {label && <FormLabel>{label}</FormLabel>}
 
-      <InputGroup w={w ?? "100%"} borderColor="gray.400">
+      <InputGroup w={w ?? "100%"} borderColor="gray.400" size={size ?? "lg"}>
         {iconLeftAddon && (
           <InputLeftAddon>
             <Icon as={iconLeftAddon} color="black.800" />
@@ -67,7 +67,6 @@ const TextInput: FC<TextInputProps> = ({
           }
           type={showValue ? "text" : "password"}
           placeholder={placeholder ? placeholder : "Insira um valor..."}
-          size={size ?? "lg"}
           disabled={isDisabled ?? false}
           defaultValue={defaultValue ?? ""}
         />
