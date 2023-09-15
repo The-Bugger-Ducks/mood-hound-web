@@ -34,6 +34,7 @@ const chakraTheme = extendTheme({
           fontSize: "xl",
           color: "teal.500",
           fontWeight: "bold",
+          mb: "1.5rem",
         },
       },
     },
