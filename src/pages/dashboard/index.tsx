@@ -1,13 +1,6 @@
-import Header from "../../components/Header";
-import {
-  Flex,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text,
-} from "@chakra-ui/react";
+import ReviewAnalysis from "./ReviewAnalysis";
+
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 
 export default function Dashboard() {
   return (
@@ -18,11 +11,11 @@ export default function Dashboard() {
       </TabList>
 
       <TabPanels>
-        <TabPanel>
-          <p>one!</p>
+        <TabPanel p="0">
+          <ReviewAnalysis />
         </TabPanel>
 
-        <TabPanel>
+        <TabPanel p="0">
           <p>two!</p>
         </TabPanel>
       </TabPanels>
