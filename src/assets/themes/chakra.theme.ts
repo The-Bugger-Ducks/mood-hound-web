@@ -1,6 +1,13 @@
 import { extendTheme } from "@chakra-ui/react";
 
 const chakraTheme = extendTheme({
+  styles: {
+    global: {
+      "html, body, root": {
+        bg: "gray.50",
+      },
+    },
+  },
   components: {
     Input: {
       defaultProps: {
