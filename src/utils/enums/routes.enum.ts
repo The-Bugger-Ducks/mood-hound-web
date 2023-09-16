@@ -1,6 +1,8 @@
 enum RoutesEnum {
-  DASHBOARD = "/dashboard",
   LOGIN = "/login",
+
+  AUTHENTICATED = "/authenticated",
+  DASHBOARD = "/authenticated/dashboard",
 }
 
 export default RoutesEnum;
