@@ -1,4 +1,5 @@
 import ReviewAnalysis from "./ReviewAnalysis";
+import SystemInformation from "./SystemInformation";
 
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 
@@ -16,7 +17,7 @@ export default function Dashboard() {
         </TabPanel>
 
         <TabPanel p="0">
-          <p>two!</p>
+          <SystemInformation />
         </TabPanel>
       </TabPanels>
     </Tabs>
