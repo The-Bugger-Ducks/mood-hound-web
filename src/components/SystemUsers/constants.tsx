@@ -1,4 +1,4 @@
-import { RowInterface } from "../../../components/Table/props";
+import { RowInterface } from "../../components/Table/props";
 import { BiTrashAlt } from "react-icons/bi";
 import { MdBrightness5 } from "react-icons/md";
 import { Badge, Button, Icon } from "@chakra-ui/react";
