@@ -69,7 +69,10 @@ export default function SystemUsers() {
 
   const updateUserRole = async (role: UserRoleEnum) => {
     if (!userToUpdate) return;
-    const response = await userRequests.update({ id: userToUpdate, role });
+    const response = await userRequests.updateRole({
+      userId: userToUpdate,
+      role,
+    });
 
     if (response === "error") {
       toast({
