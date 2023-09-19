@@ -23,7 +23,7 @@ const Header: FC = () => {
   };
 
   return (
-    <HStack position="sticky" zIndex={9999} w="100%" top="0" spacing="1.5rem">
+    <HStack position="sticky" zIndex={999} w="100%" top="0" spacing="1.5rem">
       <Image src={logo} />
 
       <TextInput
