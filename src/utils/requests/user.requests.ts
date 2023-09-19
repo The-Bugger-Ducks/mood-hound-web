@@ -31,6 +31,22 @@ class UserRequests {
       return "error";
     }
   }
+
+  async update(body: {
+    id: string;
+    name?: string;
+    email?: string;
+    role?: UserRoleEnum;
+  }) {
+    try {
+      const response = await api.put(EndpointsEnum.USER_UPDATE, body);
+
+      return response.data;
+    } catch (error) {
+      console.log("ERROR on search by users: ", error);
+      return "error";
+    }
+  }
 }
 
 export default new UserRequests();

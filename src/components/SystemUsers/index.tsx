@@ -3,6 +3,8 @@ import SearchModal from "./SearchModal";
 import UserRoleEnum from "../../utils/enums/userRole.enum";
 import userRequests from "../../utils/requests/user.requests";
 import UserInterface from "../../utils/interfaces/user.interface";
+import ConfirmModal from "../ConfirmModal";
+import UpdateRoleModal from "./UpdateRoleModal";
 
 import { useEffect, useState } from "react";
 import { BiSlider, BiTrashAlt } from "react-icons/bi";
@@ -21,15 +23,17 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import ConfirmModal from "../ConfirmModal";
 
 export default function SystemUsers() {
-  const searchModalController = useDisclosure();
-  const removeUserModalController = useDisclosure();
   const toast = useToast();
+
+  const searchModalController = useDisclosure();
+  const updateRoleModalController = useDisclosure();
+  const removeUserModalController = useDisclosure();
 
   const [users, setUsers] = useState<UserInterface[]>([]);
   const [userToRemove, setUserToRemove] = useState<string | undefined>();
+  const [userToUpdate, setUserToUpdate] = useState<string | undefined>();
   const [systemUsersTableRows, setSystemUsersTableRows] = useState<
     RowInterface[]
   >([]);
@@ -63,6 +67,41 @@ export default function SystemUsers() {
     setUsers(response);
   };
 
+  const updateUserRole = async (role: UserRoleEnum) => {
+    if (!userToUpdate) return;
+    const response = await userRequests.update({ id: userToUpdate, role });
+
+    if (response === "error") {
+      toast({
+        title: "Não foi possível atualizar usuário.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      return;
+    }
+
+    toast({
+      title: "Usuário atualizado.",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+
+    searchUsers();
+  };
+
+  const openUpdateUserRoleModal = (userId: string) => {
+    setUserToUpdate(userId);
+    updateRoleModalController.onOpen();
+  };
+
+  const cancelUpdateUserRole = () => {
+    setUserToUpdate(undefined);
+    updateRoleModalController.onClose();
+  };
+
   const removeUser = async (id: string) => {
     const response = await userRequests.remove(id);
 
@@ -92,7 +131,7 @@ export default function SystemUsers() {
     setUserToRemove(undefined);
   };
 
-  const openConfirmRemoveUser = (userId: string) => {
+  const openConfirmRemoveUserModal = (userId: string) => {
     setUserToRemove(userId);
     removeUserModalController.onOpen();
   };
@@ -121,6 +160,7 @@ export default function SystemUsers() {
                   variant="ghost"
                   color="teal.500"
                   leftIcon={<Icon as={MdBrightness5} />}
+                  onClick={() => openUpdateUserRoleModal(newUser.id)}
                 >
                   Gerenciar privilégios
                 </Button>
@@ -130,7 +170,7 @@ export default function SystemUsers() {
                   variant="ghost"
                   color="gray.500"
                   leftIcon={<Icon as={BiTrashAlt} />}
-                  onClick={() => openConfirmRemoveUser(newUser.id)}
+                  onClick={() => openConfirmRemoveUserModal(newUser.id)}
                 >
                   Remover do sistema
                 </Button>
@@ -190,6 +230,12 @@ export default function SystemUsers() {
             if (userToRemove) removeUser(userToRemove);
           },
         }}
+      />
+
+      <UpdateRoleModal
+        isOpen={updateRoleModalController.isOpen}
+        onClose={cancelUpdateUserRole}
+        confirmButton={updateUserRole}
       />
     </Box>
   );
