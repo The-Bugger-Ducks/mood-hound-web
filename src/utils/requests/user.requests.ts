@@ -20,6 +20,17 @@ class UserRequests {
       return "error";
     }
   }
+
+  async remove(id: string) {
+    try {
+      const response = await api.delete(EndpointsEnum.USER_DELETE + `/${id}`);
+
+      return response.data;
+    } catch (error) {
+      console.log("ERROR on delete user: ", error);
+      return "error";
+    }
+  }
 }
 
 export default new UserRequests();

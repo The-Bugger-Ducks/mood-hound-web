@@ -4,7 +4,7 @@ import { FC } from "react";
 import {
   Box,
   Button,
-  Center,
+  Flex,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -43,7 +43,7 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
         <ModalOverlay />
 
         <ModalContent p="1.5rem">
-          <ModalHeader textAlign="center">
+          <ModalHeader>
             <Text fontSize="lg" fontWeight="700">
               {title}
             </Text>
@@ -52,19 +52,17 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
           <ModalCloseButton />
 
           <ModalBody>
-            <Text fontSize="md" textAlign="center">
-              {body}
-            </Text>
+            <Text fontSize="md">{body}</Text>
 
-            <Center gap="1rem" mt="1.5rem" alignItems="center">
-              <Button variant="outline" colorScheme="red" onClick={cancel}>
+            <Flex gap="1rem" mt="1.5rem" justifyContent="flex-end">
+              <Button colorScheme="gray" onClick={cancel}>
                 {customCancelButton?.label ?? "Cancelar"}
               </Button>
 
-              <Button onClick={confirm}>
+              <Button colorScheme="red" onClick={confirm}>
                 {customConfirmButton.label ?? "Prosseguir"}
               </Button>
-            </Center>
+            </Flex>
           </ModalBody>
         </ModalContent>
       </Modal>

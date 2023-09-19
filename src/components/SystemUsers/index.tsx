@@ -21,12 +21,15 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import ConfirmModal from "../ConfirmModal";
 
 export default function SystemUsers() {
   const searchModalController = useDisclosure();
+  const removeUserModalController = useDisclosure();
   const toast = useToast();
 
   const [users, setUsers] = useState<UserInterface[]>([]);
+  const [userToRemove, setUserToRemove] = useState<string | undefined>();
   const [systemUsersTableRows, setSystemUsersTableRows] = useState<
     RowInterface[]
   >([]);
@@ -58,6 +61,40 @@ export default function SystemUsers() {
     }
 
     setUsers(response);
+  };
+
+  const removeUser = async (id: string) => {
+    const response = await userRequests.remove(id);
+
+    if (response === "error") {
+      toast({
+        title: "Não foi possível remover usuário.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      return;
+    }
+
+    toast({
+      title: "Usuário removido com sucesso.",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+    });
+
+    setUserToRemove(undefined);
+    searchUsers();
+  };
+
+  const cancelRemoveUser = () => {
+    setUserToRemove(undefined);
+  };
+
+  const openConfirmRemoveUser = (userId: string) => {
+    setUserToRemove(userId);
+    removeUserModalController.onOpen();
   };
 
   const refreshTable = (newUsers: UserInterface[]) => {
@@ -93,6 +130,7 @@ export default function SystemUsers() {
                   variant="ghost"
                   color="gray.500"
                   leftIcon={<Icon as={BiTrashAlt} />}
+                  onClick={() => openConfirmRemoveUser(newUser.id)}
                 >
                   Remover do sistema
                 </Button>
@@ -135,6 +173,23 @@ export default function SystemUsers() {
         isOpen={searchModalController.isOpen}
         onClose={searchModalController.onClose}
         confirmButton={searchUsers}
+      />
+
+      <ConfirmModal
+        isOpen={removeUserModalController.isOpen}
+        onClose={removeUserModalController.onClose}
+        title="ATENÇÃO"
+        body="Tem certeza de que deseja remover o usuário do sistema? Essa ação é irreversível."
+        customCancelButton={{
+          label: "Cancelar",
+          onClick: () => cancelRemoveUser(),
+        }}
+        customConfirmButton={{
+          label: "Remover usuário",
+          onClick: () => {
+            if (userToRemove) removeUser(userToRemove);
+          },
+        }}
       />
     </Box>
   );
