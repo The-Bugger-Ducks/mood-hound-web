@@ -25,11 +25,11 @@ export default function UserRegistration() {
   const toast = useToast();
   const confirmRefresh = useDisclosure();
 
-  const [defaultName, setDefaultName] = useState("");
-  const [defaultRole, setDefaultRole] = useState("");
-  const [defaultEmail, setDefaultEmail] = useState("");
-  const [defaultPassword, setDefaultPassword] = useState("");
-  const [defaultConfirmPassword, setDefaultConfirmPassword] = useState("");
+  const defaultName = "";
+  const defaultRole = "";
+  const defaultEmail = "";
+  const defaultPassword = "";
+  const defaultConfirmPassword = "";
 
   const [name, setName] = useState(defaultName);
   const [role, setRole] = useState(defaultRole);
