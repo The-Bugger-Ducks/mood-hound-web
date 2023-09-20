@@ -1,14 +1,18 @@
+const sessionStorageKeys = {
+  AUTH_TOKEN: "@moodhound:auth_token",
+};
+
 class SessionHandler {
   clearRecords() {
     sessionStorage.clear();
   }
 
   setAuthToken(token: string) {
-    sessionStorage.setItem("@moodhound:auth_token", JSON.stringify(token));
+    sessionStorage.setItem(sessionStorageKeys.AUTH_TOKEN, JSON.stringify(token));
   }
 
   getAuthToken() {
-    const sessionInfo = sessionStorage.getItem("@moodhound:auth_token");
+    const sessionInfo = sessionStorage.getItem(sessionStorageKeys.AUTH_TOKEN);
 
     if (!sessionInfo) return null;
 
