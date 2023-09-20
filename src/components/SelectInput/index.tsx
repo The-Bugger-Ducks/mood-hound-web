@@ -22,6 +22,7 @@ const SelectInput: FC<SelectInputProps> = ({
   isDisabled,
   defaultValue,
   options,
+  value,
 }) => {
   return (
     <FormControl
@@ -42,6 +43,7 @@ const SelectInput: FC<SelectInputProps> = ({
           borderColor="gray.400"
           focusBorderColor="teal.500"
           size={size ?? "lg"}
+          value={value}
         >
           {options.map((option, index) => (
             <option value={option.value} key={index}>

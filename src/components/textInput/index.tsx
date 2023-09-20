@@ -30,6 +30,8 @@ const TextInput: FC<TextInputProps> = ({
   iconLeftAddon,
   isDisabled,
   defaultValue,
+  inputType,
+  value,
 }) => {
   const [showValue, setShowValue] = useState(
     inputMode !== "alternateVisibility"
@@ -65,14 +67,15 @@ const TextInput: FC<TextInputProps> = ({
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             onChange ? onChange(event.target.value) : console.log(event)
           }
-          type={showValue ? "text" : "password"}
+          type={showValue ? inputType ?? "text" : "password"}
           placeholder={placeholder ? placeholder : "Insira um valor..."}
           disabled={isDisabled ?? false}
           defaultValue={defaultValue ?? ""}
+          value={value}
         />
 
         {inputMode === "alternateVisibility" && (
-          <InputRightElement h="100%" w="20%">
+          <InputRightElement h="100%">
             <Button
               onClick={() => setShowValue(!showValue)}
               colorScheme="gray"

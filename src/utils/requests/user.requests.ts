@@ -32,14 +32,9 @@ class UserRequests {
     }
   }
 
-  async update(body: {
-    id: string;
-    name?: string;
-    email?: string;
-    role?: UserRoleEnum;
-  }) {
+  async updateRole(body: { userId: string; role: UserRoleEnum }) {
     try {
-      const response = await api.put(EndpointsEnum.USER_UPDATE, body);
+      const response = await api.put(EndpointsEnum.USER_UPDATE_ROLE, body);
 
       return response.data;
     } catch (error) {
@@ -48,9 +43,31 @@ class UserRequests {
     }
   }
 
-  async updateRole(body: { userId: string; role: UserRoleEnum }) {
+  async create(body: {
+    name: string;
+    email: string;
+    role: UserRoleEnum;
+    password: string;
+  }) {
     try {
-      const response = await api.put(EndpointsEnum.USER_UPDATE_ROLE, body);
+      const response = await api.post(EndpointsEnum.USER_CREATE, body);
+
+      return response.data;
+    } catch (error) {
+      console.log("ERROR on search by users: ", error);
+      return "error";
+    }
+  }
+
+  async update(body: {
+    id: string;
+    name?: string;
+    email?: string;
+    role?: UserRoleEnum;
+    password?: string;
+  }) {
+    try {
+      const response = await api.put(EndpointsEnum.USER_UPDATE, body);
 
       return response.data;
     } catch (error) {

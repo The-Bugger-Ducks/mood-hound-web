@@ -59,7 +59,10 @@ const ConfirmModal: FC<ConfirmModalProps> = ({
                 {customCancelButton?.label ?? "Cancelar"}
               </Button>
 
-              <Button colorScheme="red" onClick={confirm}>
+              <Button
+                colorScheme={customConfirmButton?.color ?? "red"}
+                onClick={confirm}
+              >
                 {customConfirmButton.label ?? "Prosseguir"}
               </Button>
             </Flex>

@@ -6,6 +6,7 @@ export default interface ConfirmModalProps {
 
   customConfirmButton: {
     label?: string;
+    color?: string;
     onClick: () => void;
   };
 

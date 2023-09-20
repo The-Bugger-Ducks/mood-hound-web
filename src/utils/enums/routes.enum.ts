@@ -3,6 +3,7 @@ enum RoutesEnum {
 
   AUTHENTICATED = "/authenticated",
   DASHBOARD = "/authenticated/dashboard",
+  USER_REGISTRATION = "/authenticated/user-registration",
 }
 
 export default RoutesEnum;

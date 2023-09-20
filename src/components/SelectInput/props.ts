@@ -11,5 +11,6 @@ export default interface SelectInputProps {
     invalidMessage: string;
   };
   defaultValue?: string;
+  value?: string;
   options: { value: string; label: string }[];
 }

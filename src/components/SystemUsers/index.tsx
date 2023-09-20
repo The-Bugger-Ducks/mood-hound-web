@@ -6,6 +6,7 @@ import UserInterface from "../../utils/interfaces/user.interface";
 import ConfirmModal from "../ConfirmModal";
 import UpdateRoleModal from "./UpdateRoleModal";
 
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { BiSlider, BiTrashAlt } from "react-icons/bi";
 import { MdBrightness5 } from "react-icons/md";
@@ -23,9 +24,11 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import RoutesEnum from "../../utils/enums/routes.enum";
 
 export default function SystemUsers() {
   const toast = useToast();
+  const navigate = useNavigate();
 
   const searchModalController = useDisclosure();
   const updateRoleModalController = useDisclosure();
@@ -211,6 +214,15 @@ export default function SystemUsers() {
         withEllipsisInRows
         withUppercaseInHeader
       />
+
+      <Button
+        mt="1.5rem"
+        variant="outline"
+        w="100%"
+        onClick={() => navigate(RoutesEnum.USER_REGISTRATION)}
+      >
+        Cadastrar novos usuários
+      </Button>
 
       <SearchModal
         isOpen={searchModalController.isOpen}
