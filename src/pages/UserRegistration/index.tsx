@@ -146,13 +146,12 @@ export default function UserRegistration() {
   return (
     <form onSubmit={(event) => register(event)}>
       <HStack spacing="0.5rem" mb="1.5rem">
-        <Button variant="ghost">
+        <Button variant="ghost" onClick={() => navigate(RoutesEnum.DASHBOARD)}>
           <Icon
             as={MdArrowBack}
             boxSize="1.5rem"
             color="teal.500"
             mr="0.5rem"
-            onClick={() => navigate(RoutesEnum.DASHBOARD)}
           />
         </Button>
 
