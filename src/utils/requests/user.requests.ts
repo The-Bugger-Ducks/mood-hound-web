@@ -65,11 +65,21 @@ class UserRequests {
     id: string;
     name?: string;
     email?: string;
-    role?: UserRoleEnum;
     password?: string;
   }) {
     try {
       const response = await api.put(EndpointsEnum.USER_UPDATE, body);
+
+      return response.data;
+    } catch (error) {
+      console.log("ERROR on search by users: ", error);
+      return "error";
+    }
+  }
+
+  async getMe() {
+    try {
+      const response = await api.get<UserInterface>(EndpointsEnum.USER_GET_ME);
 
       return response.data;
     } catch (error) {

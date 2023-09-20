@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import UserRegistration from "./pages/UserRegistration";
+import UserUpdate from "./pages/UserUpdate";
 
 import { Flex } from "@chakra-ui/react";
 
@@ -26,6 +27,8 @@ export default function Routes() {
             path={RoutesEnum.USER_REGISTRATION}
             element={<UserRegistration />}
           />
+
+          <Route path={RoutesEnum.USER_UPDATE} element={<UserUpdate />} />
         </Route>
       </RoutesDom>
     </BrowserRouter>

@@ -4,6 +4,7 @@ enum EndpointsEnum {
   USER_UPDATE = "/users",
   USER_UPDATE_ROLE = "/users/role",
   USER_CREATE = "/users",
+  USER_GET_ME = "/users/me",
 }
 
 export default EndpointsEnum;
