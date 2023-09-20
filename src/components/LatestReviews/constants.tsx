@@ -1,5 +1,5 @@
 import { Badge } from "@chakra-ui/react";
-import { RowInterface } from "../../../components/Table/props";
+import { RowInterface } from "../Table/props";
 
 export const lastReviewsTableHeader: RowInterface = {
   cells: [

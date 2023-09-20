@@ -2,6 +2,10 @@ import RoutesEnum from "./utils/enums/routes.enum";
 import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import UserRegistration from "./pages/UserRegistration";
+import UserUpdate from "./pages/UserUpdate";
+
+import { Flex } from "@chakra-ui/react";
 
 import {
   BrowserRouter,
@@ -9,7 +13,6 @@ import {
   Route,
   Routes as RoutesDom,
 } from "react-router-dom";
-import { Flex } from "@chakra-ui/react";
 
 export default function Routes() {
   return (
@@ -19,6 +22,13 @@ export default function Routes() {
 
         <Route path={RoutesEnum.AUTHENTICATED} element={<Authenticated />}>
           <Route path={RoutesEnum.DASHBOARD} element={<Dashboard />} />
+
+          <Route
+            path={RoutesEnum.USER_REGISTRATION}
+            element={<UserRegistration />}
+          />
+
+          <Route path={RoutesEnum.USER_UPDATE} element={<UserUpdate />} />
         </Route>
       </RoutesDom>
     </BrowserRouter>
