@@ -1,45 +1,60 @@
-import RoutesEnum from "./utils/enums/routes.enum";
-import Header from "./components/Header";
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
-import UserRegistration from "./pages/UserRegistration";
-import UserUpdate from "./pages/UserUpdate";
-
-import { Flex } from "@chakra-ui/react";
-
 import {
   BrowserRouter,
+  Navigate,
   Outlet,
   Route,
   Routes as RoutesDom,
 } from "react-router-dom";
 
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import UserRegistration from "./pages/UserRegistration";
+import UserUpdate from "./pages/UserUpdate";
+
+import RoutesEnum from "./utils/enums/routes.enum";
+
+import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
+
+import { useAuth } from "./hooks/useAuth";
+
 export default function Routes() {
   return (
     <BrowserRouter basename="/">
       <RoutesDom>
-        <Route path={RoutesEnum.LOGIN} element={<Login />} />
+        <Route element={<Authenticated isPrivate={false} />}>
+          <Route path={RoutesEnum.LOGIN} element={<Login />} />          
+        </Route>
 
-        <Route path={RoutesEnum.AUTHENTICATED} element={<Authenticated />}>
-          <Route path={RoutesEnum.DASHBOARD} element={<Dashboard />} />
+        <Route element={<Authenticated isPrivate={true} />}>
+          <Route element={<AuthenticatedLayout />}>
+            <Route path={"/"} element={<Dashboard />} />
+            <Route path={RoutesEnum.DASHBOARD} element={<Dashboard />} />
 
-          <Route
-            path={RoutesEnum.USER_REGISTRATION}
-            element={<UserRegistration />}
-          />
+            <Route path={RoutesEnum.USER_REGISTRATION} element={<UserRegistration />} />
 
-          <Route path={RoutesEnum.USER_UPDATE} element={<UserUpdate />} />
+            <Route path={RoutesEnum.USER_UPDATE} element={<UserUpdate />} />
+          </Route>
         </Route>
       </RoutesDom>
     </BrowserRouter>
   );
 }
 
-function Authenticated() {
+function Authenticated({ isPrivate }: {isPrivate: boolean}) {
+  const { signedIn } = useAuth();
+
+  console.log(signedIn);
+  
+
+  if (!signedIn && isPrivate) {
+    return <Navigate to="/login" replace />;
+  }
+  
+  if (signedIn && !isPrivate) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
-    <Flex flexDir="column" gap="2.5rem" p="2.5rem">
-      <Header />
-      <Outlet />
-    </Flex>
+    <Outlet />
   );
 }

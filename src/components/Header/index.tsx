@@ -9,21 +9,20 @@ import { MdLogout } from "react-icons/md";
 import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
 import { HStack, Image } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 
 const Header: FC = () => {
+  const { signout } = useAuth()
+
   const navigate = useNavigate();
 
   const options = [
     { label: "Meu perfil", onClick: () => openMyProfile() },
-    { label: "Sair", onClick: () => logout(), iconConfig: { icon: MdLogout } },
+    { label: "Sair", onClick: () => signout(), iconConfig: { icon: MdLogout } },
   ];
 
   const openMyProfile = () => {
     navigate(RoutesEnum.USER_UPDATE);
-  };
-
-  const logout = () => {
-    console.log("Cliquei logout");
   };
 
   return (
