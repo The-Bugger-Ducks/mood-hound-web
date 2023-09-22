@@ -48,10 +48,6 @@ export default function UserUpdate() {
     messageError: "",
   });
 
-  useEffect(() => {
-    getDefaultValues();
-  });
-
   const resetValues = () => {
     setName(defaultName);
     setRole(defaultRole);
@@ -90,6 +86,10 @@ export default function UserUpdate() {
     setRole(response.role);
     setEmail(response.email);
   };
+
+  useEffect(() => {
+    getDefaultValues();
+  }, []);
 
   const updateUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
