@@ -1,6 +1,4 @@
-const sessionStorageKeys = {
-  AUTH_TOKEN: "@moodhound:auth_token",
-};
+import { SessionStorageKeysEnum } from "../enums/sessionStorageKeys.enum";
 
 class SessionHandler {
   clearRecords() {
@@ -8,11 +6,11 @@ class SessionHandler {
   }
 
   setAuthToken(token: string) {
-    sessionStorage.setItem(sessionStorageKeys.AUTH_TOKEN, JSON.stringify(token));
+    sessionStorage.setItem(SessionStorageKeysEnum.AUTH_TOKEN, JSON.stringify(token));
   }
 
   getAuthToken() {
-    const sessionInfo = sessionStorage.getItem(sessionStorageKeys.AUTH_TOKEN);
+    const sessionInfo = sessionStorage.getItem(SessionStorageKeysEnum.AUTH_TOKEN);
 
     if (!sessionInfo) return null;
 
