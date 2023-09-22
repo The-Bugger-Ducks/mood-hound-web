@@ -18,4 +18,5 @@ export default interface TextInputProps {
   };
   iconLeftAddon?: IconType;
   defaultValue?: string;
+  onEnter?: () => void;
 }

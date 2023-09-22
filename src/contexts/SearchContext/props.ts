@@ -1,5 +1,5 @@
 interface SearchContextProps {
-  getValueToSearch: () => string | undefined;
+  valueToSearch: string | undefined;
   updateValueToSearch: (value: string | undefined) => void;
 }
 
