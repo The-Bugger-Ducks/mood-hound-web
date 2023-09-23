@@ -11,9 +11,8 @@ export default interface TableProps {
   rows: RowInterface[];
 
   paginationController?: {
-    currentPage: number;
-    totalPages: number;
-    onChangePage: (event: React.ChangeEvent<unknown>, value: number) => void;
+    onNextPage: () => void;
+    onPreviousPage: () => void;
   };
 }
 

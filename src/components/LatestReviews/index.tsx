@@ -27,6 +27,11 @@ export default function LatestReviews() {
         rows={lastReviewsTableRows}
         withEllipsisInRows
         withUppercaseInHeader
+        paginationController={{
+          onChangePage: (event) => {
+            console.log(event);
+          },
+        }}
       />
     </Box>
   );
