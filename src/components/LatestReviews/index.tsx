@@ -2,10 +2,12 @@ import Table from "../Table";
 import moment from "moment";
 import queryCommentsProcessor from "../../utils/processors/queryComments.processor";
 import CommentInterface from "../../utils/interfaces/comment.interface";
+import SearchModal from "./SearchModal";
 
 import { useState } from "react";
 import { BiSlider } from "react-icons/bi";
 import { RowInterface } from "../Table/props";
+import { CommentTopicEnum } from "../../utils/enums/commentTopic.enum";
 import { lastReviewsTableHeader } from "./constants";
 
 import {
@@ -16,11 +18,13 @@ import {
   Icon,
   Spacer,
   Text,
+  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 
 export default function LatestReviews() {
   const toast = useToast();
+  const searchModalController = useDisclosure();
 
   const [cursor, setCursor] = useState<string | undefined>();
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
@@ -74,6 +78,15 @@ export default function LatestReviews() {
     setLastReviewsTableRows(newLastReviewsTableRows);
   };
 
+  const applyFilters = (
+    description?: string,
+    topic?: CommentTopicEnum,
+    dateStart?: Date,
+    dateEnd?: Date
+  ) => {
+    console.log(dateStart, dateEnd);
+  };
+
   return (
     <Box m="2rem 0" p="0" bg="transparent">
       <Flex>
@@ -86,6 +99,7 @@ export default function LatestReviews() {
           variant="ghost"
           color="teal.500"
           leftIcon={<Icon as={BiSlider} />}
+          onClick={searchModalController.onOpen}
         >
           Filtrar
         </Button>
@@ -136,6 +150,12 @@ export default function LatestReviews() {
             });
           },
         }}
+      />
+
+      <SearchModal
+        isOpen={searchModalController.isOpen}
+        onClose={searchModalController.onClose}
+        confirmButton={applyFilters}
       />
     </Box>
   );
