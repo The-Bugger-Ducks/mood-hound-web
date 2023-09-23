@@ -1,6 +1,6 @@
 interface MetaInterface {
   take: number;
-  hasPreviousPage: boolean;
-  hasNextPage: boolean;
-  cursor: string;
+  hasPreviousPage?: boolean;
+  hasNextPage?: boolean;
+  cursor?: string;
 }
