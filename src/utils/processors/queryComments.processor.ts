@@ -1,17 +1,21 @@
-import CommentInterface from "../interfaces/comment.interface";
+import CommentPageInterface from "../interfaces/comment.interface";
 import commentRequests from "../requests/comment.request";
 
 import { ApiServiceErr } from "../types/query.types";
 import { QueryOptions, useQuery } from "react-query";
 
 const queryCommentsProcessor = (
-  { limit, page, sortBy }: { limit: number; page: number; sortBy: number },
-  opt?: QueryOptions<CommentInterface[] | "error">
+  {
+    payload,
+  }: {
+    payload: MetaInterface;
+  },
+  opt?: QueryOptions<CommentPageInterface | "error">
 ) =>
-  useQuery<CommentInterface[] | "error", ApiServiceErr>(
-    [limit, page, sortBy],
+  useQuery<CommentPageInterface | "error", ApiServiceErr>(
+    [payload],
     async () => {
-      const response = await commentRequests.getAll(limit, page, sortBy);
+      const response = await commentRequests.getAll(payload);
       return response;
     },
     opt

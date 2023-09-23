@@ -1,11 +1,19 @@
 import api from "../../services/api.service";
 import EndpointsEnum from "../enums/endpoints.enum";
+import CommentPageInterface from "../interfaces/commentPage.interface";
 
 class CommentRequests {
-  async getAll(limit: number, page: number, sortBy: number) {
+  async getAll(meta: MetaInterface) {
     try {
-      const response = await api.get<CommentRequests[]>(
-        EndpointsEnum.COMMENT_GET_ALL
+      let query = "?order=asc";
+
+      query += `&take=${meta.take}`;
+      query += `&cursor=${meta.cursor}`;
+      query += `&next=${meta.hasNextPage}`;
+      query += `&previous=${meta.hasPreviousPage}`;
+
+      const response = await api.get<CommentPageInterface>(
+        EndpointsEnum.COMMENT_GET_ALL + query
       );
 
       return response.data;
