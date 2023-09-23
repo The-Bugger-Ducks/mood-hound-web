@@ -4,11 +4,13 @@ import queryCommentsProcessor from "../../utils/processors/queryComments.process
 import CommentInterface from "../../utils/interfaces/comment.interface";
 import SearchModal from "./SearchModal";
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BiSlider } from "react-icons/bi";
 import { RowInterface } from "../Table/props";
 import { CommentTopicEnum } from "../../utils/enums/commentTopic.enum";
-import { lastReviewsTableHeader } from "./constants";
+import { lastReviewsTableHeader, takeReviewsTable } from "./constants";
+import { SearchContext } from "../../contexts/SearchContext";
+import { SearchContextProps } from "../../contexts/SearchContext/props";
 
 import {
   Badge,
@@ -26,12 +28,22 @@ export default function LatestReviews() {
   const toast = useToast();
   const searchModalController = useDisclosure();
 
+  const { valueToSearch } = useContext(SearchContext) as SearchContextProps;
+
   const [cursor, setCursor] = useState<string | undefined>();
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
   const [hasPreviousPage, setHasPreviousPage] = useState<boolean>(false);
   const [lastReviewsTableRows, setLastReviewsTableRows] = useState<
     RowInterface[]
   >([]);
+
+  useEffect(() => {
+    getComments({ take: takeReviewsTable });
+  }, []);
+
+  useEffect(() => {
+    getComments({ take: takeReviewsTable });
+  }, [valueToSearch]);
 
   const getComments = (payload: MetaInterface) => {
     const response = queryCommentsProcessor(payload);
@@ -79,12 +91,12 @@ export default function LatestReviews() {
   };
 
   const applyFilters = (
-    description?: string,
     topic?: CommentTopicEnum,
     dateStart?: Date,
     dateEnd?: Date
   ) => {
-    console.log(dateStart, dateEnd);
+    // aplicar o valueToSearch diretamente como description
+    getComments({ take: takeReviewsTable });
   };
 
   return (
@@ -124,7 +136,7 @@ export default function LatestReviews() {
             }
 
             getComments({
-              take: 15,
+              take: takeReviewsTable,
               cursor,
               hasNextPage: true,
               hasPreviousPage: false,
@@ -143,7 +155,7 @@ export default function LatestReviews() {
             }
 
             getComments({
-              take: 15,
+              take: takeReviewsTable,
               cursor,
               hasNextPage: false,
               hasPreviousPage: true,

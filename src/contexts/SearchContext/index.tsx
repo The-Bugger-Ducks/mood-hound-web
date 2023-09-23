@@ -1,4 +1,5 @@
 import { createContext, FC, useState } from "react";
+import { SearchContextProps, SearchProviderProps } from "./props";
 
 export const SearchContext = createContext<SearchContextProps | null>(null);
 

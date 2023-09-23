@@ -4,7 +4,6 @@ export default interface SearchModal {
   isOpen: boolean;
   onClose: () => void;
   confirmButton: (
-    description?: string,
     topic?: CommentTopicEnum,
     dateStart?: Date,
     dateEnd?: Date

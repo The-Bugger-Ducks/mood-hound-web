@@ -26,7 +26,6 @@ const SearchModal: FC<SearchModalProps> = ({
   onClose,
   confirmButton,
 }) => {
-  const [description, setDescription] = useState<string | undefined>();
   const [topic, setTopic] = useState<string | undefined>();
   const [dateStart, setDateStart] = useState<Date | undefined>();
   const [dateEnd, setDateEnd] = useState<Date | undefined>();
@@ -46,7 +45,7 @@ const SearchModal: FC<SearchModalProps> = ({
 
   const confirm = () => {
     if (!isDatesValid()) return;
-    confirmButton(description, topic as CommentTopicEnum, dateStart, dateEnd);
+    confirmButton(topic as CommentTopicEnum, dateStart, dateEnd);
     onClose();
   };
 
@@ -135,12 +134,6 @@ const SearchModal: FC<SearchModalProps> = ({
 
           <ModalBody>
             <VStack spacing="1.5rem">
-              <TextInput
-                label="Descrição"
-                onChange={setDescription}
-                defaultValue={description}
-              />
-
               <SelectInput
                 label="Tópico"
                 onChange={setTopic}

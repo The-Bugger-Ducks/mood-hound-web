@@ -7,9 +7,9 @@ class CommentRequests {
     let query = "?order=asc";
 
     query += `&take=${meta.take}`;
-    query += `&cursor=${meta.cursor}`;
-    query += `&next=${meta.hasNextPage}`;
-    query += `&previous=${meta.hasPreviousPage}`;
+    if (meta.cursor) query += `&cursor=${meta.cursor}`;
+    if (meta.hasNextPage) query += `&next=${meta.hasNextPage}`;
+    if (meta.hasPreviousPage) query += `&previous=${meta.hasPreviousPage}`;
 
     const response = await api.get<CommentPageInterface>(
       EndpointsEnum.COMMENT_GET_ALL + query

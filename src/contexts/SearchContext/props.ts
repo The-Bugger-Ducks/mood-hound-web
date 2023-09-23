@@ -1,8 +1,8 @@
-interface SearchContextProps {
+export interface SearchContextProps {
   valueToSearch: string | undefined;
   updateValueToSearch: (value: string | undefined) => void;
 }
 
-interface SearchProviderProps {
+export interface SearchProviderProps {
   children: React.ReactNode;
 }
