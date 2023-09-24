@@ -13,4 +13,12 @@ export const topicOptions = [
     value: CommentTopicEnum.RECOMMENDATION,
     label: "Recomendação",
   },
+  {
+    value: CommentTopicEnum.COST_BENEFIT,
+    label: "Custo-benefício",
+  },
+  {
+    value: CommentTopicEnum.OTHERS,
+    label: "Outros",
+  },
 ];

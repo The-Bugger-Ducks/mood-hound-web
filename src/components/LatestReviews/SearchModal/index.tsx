@@ -1,7 +1,5 @@
 import SearchModalProps from "./props";
-import TextInput from "../../TextInput";
 import SelectInput from "../../SelectInput";
-import UserRoleEnum from "../../../utils/enums/userRole.enum";
 
 import { FC, useState } from "react";
 import {
