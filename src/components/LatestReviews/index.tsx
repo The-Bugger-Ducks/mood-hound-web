@@ -22,6 +22,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import commentSentimentHandler from "../../utils/handlers/commentSentiment.handler";
 
 export default function LatestReviews() {
   const toast = useToast();
@@ -90,7 +91,13 @@ export default function LatestReviews() {
           { align: "left", element: moment(newComment.createdAt).format("l") },
           {
             align: "left",
-            element: <Badge colorScheme="red">{newComment.topic}</Badge>,
+            element: (
+              <Badge
+                colorScheme={commentSentimentHandler(newComment.sentiment)}
+              >
+                {newComment.topic}
+              </Badge>
+            ),
           },
           {
             align: "left",

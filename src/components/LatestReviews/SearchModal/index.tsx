@@ -96,15 +96,15 @@ const SearchModal: FC<SearchModalProps> = ({
       return false;
     }
 
-    if (dateEnd && dateStart && dateEnd > dateStart) {
+    if (dateEnd && dateStart && dateEnd < dateStart) {
       setDateStartError({
         hasError: true,
-        messageError: "O ínicio do período deve ser após o fim do período.",
+        messageError: "O ínicio do período deve ser antes do fim do período.",
       });
 
       setDateEndError({
         hasError: true,
-        messageError: "O ínicio do período deve ser após o fim do período.",
+        messageError: "O ínicio do período deve ser antes do fim do período.",
       });
 
       return false;
