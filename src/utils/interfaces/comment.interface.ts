@@ -1,3 +1,5 @@
+import CommentSentimentEnum from "../enums/commentSentiment.enum";
+
 export default interface CommentInterface {
   id: string;
   productId: string;

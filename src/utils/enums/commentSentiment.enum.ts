@@ -4,3 +4,5 @@ enum CommentSentimentEnum {
   NEUTRAL = "NEUTRAL",
   INDETERMINATE = "INDETERMINATE",
 }
+
+export default CommentSentimentEnum;

@@ -4,13 +4,12 @@ import queryCommentsProcessor from "../../utils/processors/queryComments.process
 import CommentInterface from "../../utils/interfaces/comment.interface";
 import SearchModal from "./SearchModal";
 
-import { useContext, useEffect, useState } from "react";
+import { useSearch } from "../../hooks/useSearch";
+import { useEffect, useState } from "react";
 import { BiSlider } from "react-icons/bi";
 import { RowInterface } from "../Table/props";
 import { CommentTopicEnum } from "../../utils/enums/commentTopic.enum";
 import { lastReviewsTableHeader, takeReviewsTable } from "./constants";
-import { SearchContext } from "../../contexts/SearchContext";
-import { SearchContextProps } from "../../contexts/SearchContext/props";
 
 import {
   Badge,
@@ -28,7 +27,11 @@ export default function LatestReviews() {
   const toast = useToast();
   const searchModalController = useDisclosure();
 
-  const { valueToSearch } = useContext(SearchContext) as SearchContextProps;
+  const { valueToSearch } = useSearch();
+
+  const [topic, setTopic] = useState<CommentTopicEnum | undefined>();
+  const [dateStart, setDateStart] = useState<Date | undefined>();
+  const [dateEnd, setDateEnd] = useState<Date | undefined>();
 
   const [cursor, setCursor] = useState<string | undefined>();
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
@@ -37,16 +40,26 @@ export default function LatestReviews() {
     RowInterface[]
   >([]);
 
+  const responseQueryCommentsProcessor = queryCommentsProcessor(
+    {
+      take: takeReviewsTable,
+      cursor,
+      hasNextPage,
+      hasPreviousPage,
+    },
+    { comment: valueToSearch, dateDone: dateEnd, dateStart: dateStart, topic }
+  );
+
   useEffect(() => {
-    getComments({ take: takeReviewsTable });
+    getComments();
   }, []);
 
   useEffect(() => {
-    getComments({ take: takeReviewsTable });
-  }, [valueToSearch]);
+    getComments();
+  }, [valueToSearch, topic, dateStart, dateEnd]);
 
-  const getComments = (payload: MetaInterface) => {
-    const response = queryCommentsProcessor(payload);
+  const getComments = async () => {
+    const response = await responseQueryCommentsProcessor.refetch();
 
     if (!response.data) {
       toast({
@@ -91,12 +104,13 @@ export default function LatestReviews() {
   };
 
   const applyFilters = (
-    topic?: CommentTopicEnum,
-    dateStart?: Date,
-    dateEnd?: Date
+    newTopic?: CommentTopicEnum,
+    newDateStart?: Date,
+    newDateEnd?: Date
   ) => {
-    // aplicar o valueToSearch diretamente como description
-    getComments({ take: takeReviewsTable });
+    setTopic(newTopic);
+    setDateStart(newDateStart);
+    setDateEnd(newDateEnd);
   };
 
   return (
@@ -135,12 +149,7 @@ export default function LatestReviews() {
               return;
             }
 
-            getComments({
-              take: takeReviewsTable,
-              cursor,
-              hasNextPage: true,
-              hasPreviousPage: false,
-            });
+            getComments();
           },
           onPreviousPage: () => {
             if (!hasPreviousPage) {
@@ -154,12 +163,7 @@ export default function LatestReviews() {
               return;
             }
 
-            getComments({
-              take: takeReviewsTable,
-              cursor,
-              hasNextPage: false,
-              hasPreviousPage: true,
-            });
+            getComments();
           },
         }}
       />

@@ -1,7 +1,7 @@
 import { createContext, FC, useState } from "react";
 import { SearchContextProps, SearchProviderProps } from "./props";
 
-export const SearchContext = createContext<SearchContextProps | null>(null);
+export const SearchContext = createContext({} as SearchContextProps);
 
 export const SearchProvides: FC<SearchProviderProps> = ({ children }) => {
   const [valueToSearch, setValueToSearch] = useState<string | undefined>();
