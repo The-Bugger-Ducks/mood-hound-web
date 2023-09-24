@@ -1,6 +1,6 @@
 import { RowInterface } from "../Table/props";
 
-export const takeReviewsTable = 15;
+export const takeReviewsTable = 7;
 
 export const lastReviewsTableHeader: RowInterface = {
   cells: [
