@@ -5,24 +5,24 @@ import reqCommentsFilter from "../interfaces/reqCommentsFilter.interface";
 
 class CommentRequests {
   async getAll(meta: MetaInterface, filter: reqCommentsFilter) {
-    let query = `?order=asc&take=${meta.take}`;
+    
+    const query = new URLSearchParams({
+      order: "asc",
+      take: meta.take.toString()
+    })  
 
-    if (meta.cursor) query += `&cursor=${meta.cursor}`;
-    if (meta.hasNextPage !== undefined) query += `&next=${meta.hasNextPage}`;
-    if (meta.hasPreviousPage !== undefined)
-      query += `&previous=${meta.hasPreviousPage}`;
+    if (meta.cursor) query.set("cursor", meta.cursor);
+    if (meta.hasNextPage !== undefined) query.set("next", `${meta.hasNextPage}`);
+    if (meta.hasPreviousPage !== undefined) query.set("previous", `${meta.hasPreviousPage}`)
 
-    let headers = {};
+    if (filter.comment) query.set("comment", filter.comment)
+    if (filter.dateDone) query.set("dateDone", filter.dateDone.toISOString());
+    if (filter.dateStart) query.set("dateStart", filter.dateStart.toISOString());
+    if (filter.topic) query.set("topic", filter.topic)
 
-    if (filter.comment) Object.assign(headers, { comment: filter.comment });
-    if (filter.dateDone) Object.assign(headers, { dateDone: filter.dateDone });
-    if (filter.dateStart)
-      Object.assign(headers, { dateStart: filter.dateStart });
-    if (filter.topic) Object.assign(headers, { topic: filter.topic });
 
     const response = await api.get<CommentPageInterface>(
-      EndpointsEnum.COMMENT_GET_ALL + query,
-      { headers }
+      EndpointsEnum.COMMENT_GET_ALL + `?${query}`
     );
 
     return response.data;
