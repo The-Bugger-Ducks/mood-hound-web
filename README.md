@@ -1,27 +1,31 @@
-# React + TypeScript + Vite
+<h1 align="center">Frontend do Mood Hound</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Telas que permitem que o usuário vizualise as análises dos comentários e avaliações enviados por clientes de uma loja virtual. Tem por objetivo auxiliar o desenvolvimento do projeto "Mood Hound" (mais informações vide [este link](https://github.com/The-Bugger-Ducks/mood-hound-documentation)).
 
-Currently, two official plugins are available:
+> Aplicação desenvolvida por alunos do 6º semestre do tecnólogo em Desenvolvimento de Software Multiplataforma, na FATEC Profº Jessen Vidal - São José dos Campos, SP :rocket:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### :hammer_and_wrench: Tecnologias
 
-## Expanding the ESLint configuration
+As seguintes tecnologias e ferramentas foram utilizadas neste projeto: `Figma, Typescript, React, HTML, CSS, Chakra UI, Material UI, Styled Components, Axios, React Query, Vite, Yarn, ApexCharts.`
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### :gear: Como utilizar
 
-- Configure the top-level `parserOptions` property like this:
+É possível acessar a aplicação pelo link de seu deploy (clicando [aqui](mood-hound.netlify.app/auth)) mas também é possível rodar localmente seguindo o passo a passo abaixo:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+- Tutorial para rodar o projeto
+
+Com o [Node](https://nodejs.org/en/) instalado em sua máquina, utilize estes comandos em um terminal:
+
+```bash
+# Baixe ou clone este repositório
+$ git clone https://github.com/The-Bugger-Ducks/mood-hound-web.git
+
+# Duplique o arquivo .env.example, renomeie para .env e insira nele as informações solicitadas
+
+# Acesse a pasta, instale as dependências e inicie o projeto
+$ cd mood-hound-web
+$ yarn
+$ yarn dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+A aplicação inciará localmente na porta 3000. Use o navegador para acessar o link [http://localhost:3000](http://localhost:5173) e executar as funcionalidades da aplicação.

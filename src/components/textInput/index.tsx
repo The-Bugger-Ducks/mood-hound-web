@@ -30,6 +30,9 @@ const TextInput: FC<TextInputProps> = ({
   iconLeftAddon,
   isDisabled,
   defaultValue,
+  inputType,
+  value,
+  onEnter,
 }) => {
   const [showValue, setShowValue] = useState(
     inputMode !== "alternateVisibility"
@@ -41,6 +44,12 @@ const TextInput: FC<TextInputProps> = ({
     );
   }
 
+  const onEnterIsPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      if (onEnter) onEnter();
+    }
+  };
+
   return (
     <FormControl
       isRequired={isRequired ? isRequired : false}
@@ -48,7 +57,7 @@ const TextInput: FC<TextInputProps> = ({
     >
       {label && <FormLabel>{label}</FormLabel>}
 
-      <InputGroup w={w ?? "100%"} borderColor="gray.400">
+      <InputGroup w={w ?? "100%"} borderColor="gray.400" size={size ?? "lg"}>
         {iconLeftAddon && (
           <InputLeftAddon>
             <Icon as={iconLeftAddon} color="black.800" />
@@ -62,18 +71,25 @@ const TextInput: FC<TextInputProps> = ({
         )}
 
         <Input
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            onChange ? onChange(event.target.value) : console.log(event)
-          }
-          type={showValue ? "text" : "password"}
+          onChange={(event) => {
+            if (onChange) {
+              onChange(event.target.value);
+            }
+          }}
+          onKeyDown={(event) => {
+            if (onEnter) {
+              onEnterIsPress(event);
+            }
+          }}
+          type={showValue ? inputType ?? "text" : "password"}
           placeholder={placeholder ? placeholder : "Insira um valor..."}
-          size={size ?? "lg"}
           disabled={isDisabled ?? false}
           defaultValue={defaultValue ?? ""}
+          value={value}
         />
 
         {inputMode === "alternateVisibility" && (
-          <InputRightElement h="100%" w="20%">
+          <InputRightElement h="100%">
             <Button
               onClick={() => setShowValue(!showValue)}
               colorScheme="gray"
