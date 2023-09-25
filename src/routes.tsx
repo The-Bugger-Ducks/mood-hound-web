@@ -13,7 +13,7 @@ import UserUpdate from "./pages/UserUpdate";
 
 import RoutesEnum from "./utils/enums/routes.enum";
 
-import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "./layouts/authenticated.layout";
 
 import { useAuth } from "./hooks/useAuth";
 
@@ -22,7 +22,7 @@ export default function Routes() {
     <BrowserRouter basename="/">
       <RoutesDom>
         <Route element={<Authenticated isPrivate={false} />}>
-          <Route path={RoutesEnum.LOGIN} element={<Login />} />          
+          <Route path={RoutesEnum.LOGIN} element={<Login />} />
         </Route>
 
         <Route element={<Authenticated isPrivate={true} />}>
@@ -30,7 +30,10 @@ export default function Routes() {
             <Route path={"/"} element={<Dashboard />} />
             <Route path={RoutesEnum.DASHBOARD} element={<Dashboard />} />
 
-            <Route path={RoutesEnum.USER_REGISTRATION} element={<UserRegistration />} />
+            <Route
+              path={RoutesEnum.USER_REGISTRATION}
+              element={<UserRegistration />}
+            />
 
             <Route path={RoutesEnum.USER_UPDATE} element={<UserUpdate />} />
           </Route>
@@ -40,21 +43,18 @@ export default function Routes() {
   );
 }
 
-function Authenticated({ isPrivate }: {isPrivate: boolean}) {
+function Authenticated({ isPrivate }: { isPrivate: boolean }) {
   const { signedIn } = useAuth();
 
   console.log(signedIn);
-  
 
   if (!signedIn && isPrivate) {
     return <Navigate to="/login" replace />;
   }
-  
+
   if (signedIn && !isPrivate) {
     return <Navigate to="/" replace />;
   }
 
-  return (
-    <Outlet />
-  );
+  return <Outlet />;
 }

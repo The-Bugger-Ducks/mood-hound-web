@@ -7,15 +7,22 @@ import MuiTable from "@mui/material/Table";
 import { FC } from "react";
 import { StyledTableCell, StyledTableRow } from "./styles";
 import { ThemeProvider } from "@emotion/react";
-import { Box, ChakraProvider, useMediaQuery } from "@chakra-ui/react";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
+
+import {
+  Box,
+  Button,
+  ChakraProvider,
+  HStack,
+  Icon,
+  useMediaQuery,
+} from "@chakra-ui/react";
 
 import {
   TableContainer,
   TableHead,
   TableRow,
   TableCell,
-  Stack,
-  Pagination,
   TableBody,
 } from "@mui/material";
 
@@ -179,14 +186,27 @@ const Table: FC<TableProps> = ({
           </TableContainer>
 
           {paginationController && (
-            <Stack direction="row-reverse">
-              <Pagination
-                page={paginationController.currentPage}
-                onChange={paginationController.onChangePage}
-                count={paginationController.totalPages}
-                color="primary"
-              />
-            </Stack>
+            <HStack flexDir="row-reverse">
+              <Button variant="ghost">
+                <Icon
+                  as={BsChevronRight}
+                  boxSize={"1.2rem"}
+                  color={"teal.500"}
+                  mr="0.5rem"
+                  onClick={paginationController.onNextPage}
+                />
+              </Button>
+
+              <Button variant="ghost">
+                <Icon
+                  as={BsChevronLeft}
+                  boxSize={"1.2rem"}
+                  color={"teal.500"}
+                  mr="0.5rem"
+                  onClick={paginationController.onPreviousPage}
+                />
+              </Button>
+            </HStack>
           )}
         </Box>
       </ChakraProvider>

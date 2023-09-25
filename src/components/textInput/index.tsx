@@ -32,6 +32,7 @@ const TextInput: FC<TextInputProps> = ({
   defaultValue,
   inputType,
   value,
+  onEnter,
 }) => {
   const [showValue, setShowValue] = useState(
     inputMode !== "alternateVisibility"
@@ -42,6 +43,12 @@ const TextInput: FC<TextInputProps> = ({
       "It is not possible to create an input with both elements: iconLeftElement and iconLeftAddon. Please select only one."
     );
   }
+
+  const onEnterIsPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      if (onEnter) onEnter();
+    }
+  };
 
   return (
     <FormControl
@@ -64,9 +71,16 @@ const TextInput: FC<TextInputProps> = ({
         )}
 
         <Input
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            onChange ? onChange(event.target.value) : console.log(event)
-          }
+          onChange={(event) => {
+            if (onChange) {
+              onChange(event.target.value);
+            }
+          }}
+          onKeyDown={(event) => {
+            if (onEnter) {
+              onEnterIsPress(event);
+            }
+          }}
           type={showValue ? inputType ?? "text" : "password"}
           placeholder={placeholder ? placeholder : "Insira um valor..."}
           disabled={isDisabled ?? false}
