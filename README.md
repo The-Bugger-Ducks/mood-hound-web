@@ -1,4 +1,4 @@
-<h1 align="center">Frontend do Mood Hound</h1>
+![mood hound header frontend](https://github.com/The-Bugger-Ducks/mood-hound-web/assets/79321198/1b0e7294-b283-4e70-8ab0-6af0e6f8b1a2)
 
 Telas que permitem que o usuário vizualise as análises dos comentários e avaliações enviados por clientes de uma loja virtual. Tem por objetivo auxiliar o desenvolvimento do projeto "Mood Hound" (mais informações vide [este link](https://github.com/The-Bugger-Ducks/mood-hound-documentation)).
 
