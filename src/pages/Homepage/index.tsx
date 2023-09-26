@@ -3,7 +3,7 @@ import SystemInformation from "./SystemInformation";
 
 import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 
-export default function Dashboard() {
+export default function Homepage() {
   return (
     <Tabs>
       <TabList>

@@ -6,8 +6,8 @@ import {
   Routes as RoutesDom,
 } from "react-router-dom";
 
-import Dashboard from "./pages/Dashboard";
-import Login from "./pages/Login";
+import Homepage from "./pages/Homepage";
+import Auth from "./pages/Auth";
 import UserRegistration from "./pages/UserRegistration";
 import UserUpdate from "./pages/UserUpdate";
 
@@ -22,13 +22,13 @@ export default function Routes() {
     <BrowserRouter basename="/">
       <RoutesDom>
         <Route element={<Authenticated isPrivate={false} />}>
-          <Route path={RoutesEnum.LOGIN} element={<Login />} />
+          <Route path={RoutesEnum.LOGIN} element={<Auth />} />
         </Route>
 
         <Route element={<Authenticated isPrivate={true} />}>
           <Route element={<AuthenticatedLayout />}>
-            <Route path={"/"} element={<Dashboard />} />
-            <Route path={RoutesEnum.DASHBOARD} element={<Dashboard />} />
+            <Route path={"/"} element={<Homepage />} />
+            <Route path={RoutesEnum.DASHBOARD} element={<Homepage />} />
 
             <Route
               path={RoutesEnum.USER_REGISTRATION}
@@ -49,7 +49,7 @@ function Authenticated({ isPrivate }: { isPrivate: boolean }) {
   console.log(signedIn);
 
   if (!signedIn && isPrivate) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to={RoutesEnum.LOGIN} replace />;
   }
 
   if (signedIn && !isPrivate) {
