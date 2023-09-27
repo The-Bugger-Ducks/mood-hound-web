@@ -1,3 +1,4 @@
+import { topicOptions } from "../../components/LatestReviews/SearchModal/constants";
 import api from "../../services/api.service";
 import EndpointsEnum from "../enums/endpoints.enum";
 import CommentPageInterface from "../interfaces/commentPage.interface";
@@ -24,6 +25,19 @@ class CommentRequests {
     const response = await api.get<CommentPageInterface>(
       EndpointsEnum.COMMENT_GET_ALL + `?${query}`
     );
+
+    if (response) {
+      response.data?.data?.map((comment) => {
+        comment.createdAt
+
+        const topic = topicOptions.find(topic => topic.value === comment.topic)
+
+        if (topic) {
+          comment.topic = topic.label
+        }
+        return comment
+      })
+    }
 
     return response.data;
   }
