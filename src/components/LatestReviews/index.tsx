@@ -37,6 +37,10 @@ export default function LatestReviews() {
   const [cursor, setCursor] = useState<string | undefined>();
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
   const [hasPreviousPage, setHasPreviousPage] = useState<boolean>(false);
+
+  const [goToNextPage, setGoToNextPage] = useState<boolean>(true);
+  const [goToPreviousPage, setGoToPreviousPage] = useState<boolean>(false);
+
   const [lastReviewsTableRows, setLastReviewsTableRows] = useState<
     RowInterface[]
   >([]);
@@ -45,8 +49,8 @@ export default function LatestReviews() {
     {
       take: takeReviewsTable,
       cursor,
-      hasNextPage,
-      hasPreviousPage,
+      hasNextPage: goToNextPage,
+      hasPreviousPage: goToPreviousPage,
     },
     { comment: valueToSearch, dateDone: dateEnd, dateStart: dateStart, topic }
   );
@@ -101,7 +105,7 @@ export default function LatestReviews() {
           },
           {
             align: "left",
-            element: newComment.text,
+            element: <Text title={newComment.text}>{newComment.text}</Text>,
           },
         ],
       });
@@ -156,6 +160,9 @@ export default function LatestReviews() {
               return;
             }
 
+            setGoToNextPage(true);
+            setGoToPreviousPage(false);
+
             getComments();
           },
           onPreviousPage: () => {
@@ -169,6 +176,9 @@ export default function LatestReviews() {
 
               return;
             }
+
+            setGoToNextPage(false);
+            setGoToPreviousPage(true);
 
             getComments();
           },
