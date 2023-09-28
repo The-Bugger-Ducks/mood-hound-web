@@ -1,5 +1,5 @@
 import SearchModalProps from "./props";
-import TextInput from "../../TextInput";
+import TextOrEmailInput from "../../TextOrEmailInput";
 import SelectInput from "../../SelectInput";
 import UserRoleEnum from "../../../utils/enums/userRole.enum";
 
@@ -57,9 +57,13 @@ const SearchModal: FC<SearchModalProps> = ({
 
           <ModalBody>
             <VStack spacing="1.5rem">
-              <TextInput label="Nome" onChange={setName} defaultValue={name} />
+              <TextOrEmailInput
+                label="Nome"
+                onChange={setName}
+                defaultValue={name}
+              />
 
-              <TextInput
+              <TextOrEmailInput
                 label="E-mail"
                 onChange={setEmail}
                 defaultValue={email}

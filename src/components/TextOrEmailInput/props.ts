@@ -1,6 +1,6 @@
 import { IconType } from "react-icons";
 
-export default interface TextInputProps {
+export default interface TextOrEmailInputProps {
   label?: string;
   isRequired?: boolean;
   isDisabled?: boolean;

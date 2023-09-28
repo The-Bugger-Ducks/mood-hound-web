@@ -16,7 +16,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-import TextInput from "../../components/TextInput";
+import TextOrEmailInput from "../../components/TextOrEmailInput";
 import login from "../../assets/images/login.png";
 import logo from "../../assets/images/logo.svg";
 import authRequests from "../../utils/requests/auth.requests";
@@ -115,14 +115,14 @@ export default function Auth() {
             </CardHeader>
 
             <CardBody display={"flex"} flexDirection={"column"} gap={"24px"}>
-              <TextInput
+              <TextOrEmailInput
                 isRequired
                 label="E-mail"
                 inputType="email"
                 onChange={setEmail}
                 value={email}
               />
-              <TextInput
+              <TextOrEmailInput
                 isRequired
                 inputMode="alternateVisibility"
                 label="Senha"

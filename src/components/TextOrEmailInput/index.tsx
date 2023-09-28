@@ -1,6 +1,6 @@
-import TextInputProps from "./props";
+import TextOrEmailInputProps from "./props";
 
-import { ChangeEvent, FC, useState } from "react";
+import { FC, useState } from "react";
 import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 
 import {
@@ -17,7 +17,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 
-const TextInput: FC<TextInputProps> = ({
+const TextOrEmailInput: FC<TextOrEmailInputProps> = ({
   label,
   isRequired,
   w,
@@ -120,4 +120,4 @@ const TextInput: FC<TextInputProps> = ({
   );
 };
 
-export default TextInput;
+export default TextOrEmailInput;

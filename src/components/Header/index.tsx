@@ -1,6 +1,6 @@
 import logo from "../../assets/images/logo.svg";
 
-import TextInput from "../TextInput";
+import TextOrEmailInput from "../TextOrEmailInput";
 import MenuWithIcon from "../MenuWithIcon";
 import RoutesEnum from "../../utils/enums/routes.enum";
 
@@ -18,7 +18,7 @@ const Header: FC = () => {
   const navigate = useNavigate();
 
   const [valueToSearch, setValueToSearch] = useState("");
-  const searchOptions = useContext<SearchContextProps | null>(SearchContext);
+  const searchOptions = useContext(SearchContext);
 
   const options = [
     { label: "Meu perfil", onClick: () => openMyProfile() },
@@ -38,7 +38,7 @@ const Header: FC = () => {
     <HStack position="sticky" zIndex={999} w="100%" top="0" spacing="1.5rem">
       <Image src={logo} />
 
-      <TextInput
+      <TextOrEmailInput
         iconLeftAddon={BsSearch}
         placeholder="Pesquise por um comentário..."
         onChange={setValueToSearch}

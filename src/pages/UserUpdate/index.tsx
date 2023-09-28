@@ -1,4 +1,4 @@
-import TextInput from "../../components/TextInput";
+import TextOrEmailInput from "../../components/TextOrEmailInput";
 import SelectInput from "../../components/SelectInput";
 import UserRoleEnum from "../../utils/enums/userRole.enum";
 import ConfirmModal from "../../components/ConfirmModal";
@@ -192,7 +192,7 @@ export default function UserUpdate() {
 
       <Card p="3rem" variant="outline" gap="2rem">
         <HStack spacing="2rem">
-          <TextInput
+          <TextOrEmailInput
             isRequired
             label="Nome do usuário"
             defaultValue={defaultName}
@@ -213,7 +213,7 @@ export default function UserUpdate() {
           />
         </HStack>
 
-        <TextInput
+        <TextOrEmailInput
           isRequired
           label="E-mail"
           inputType="email"
@@ -223,7 +223,7 @@ export default function UserUpdate() {
         />
 
         <HStack spacing="2rem">
-          <TextInput
+          <TextOrEmailInput
             inputMode="alternateVisibility"
             label="Senha"
             defaultValue={defaultPassword}
@@ -235,7 +235,7 @@ export default function UserUpdate() {
             }}
           />
 
-          <TextInput
+          <TextOrEmailInput
             inputMode="alternateVisibility"
             label="Confirmar senha"
             defaultValue={defaultConfirmPassword}

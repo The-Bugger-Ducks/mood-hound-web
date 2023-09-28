@@ -1,4 +1,4 @@
-import TextInput from "../../components/TextInput";
+import TextOrEmailInput from "../../components/TextOrEmailInput";
 import SelectInput from "../../components/SelectInput";
 import UserRoleEnum from "../../utils/enums/userRole.enum";
 import ConfirmModal from "../../components/ConfirmModal";
@@ -162,7 +162,7 @@ export default function UserRegistration() {
 
       <Card p="3rem" variant="outline" gap="2rem">
         <HStack spacing="2rem">
-          <TextInput
+          <TextOrEmailInput
             isRequired
             label="Nome do usuário"
             defaultValue={defaultName}
@@ -183,7 +183,7 @@ export default function UserRegistration() {
           />
         </HStack>
 
-        <TextInput
+        <TextOrEmailInput
           isRequired
           label="E-mail"
           inputType="email"
@@ -193,7 +193,7 @@ export default function UserRegistration() {
         />
 
         <HStack spacing="2rem">
-          <TextInput
+          <TextOrEmailInput
             isRequired
             inputMode="alternateVisibility"
             label="Senha"
@@ -206,7 +206,7 @@ export default function UserRegistration() {
             }}
           />
 
-          <TextInput
+          <TextOrEmailInput
             isRequired
             inputMode="alternateVisibility"
             label="Confirmar senha"
