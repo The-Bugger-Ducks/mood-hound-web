@@ -215,14 +215,16 @@ export default function SystemUsers() {
         withUppercaseInHeader
       />
 
-      <Button
-        mt="1.5rem"
-        variant="outline"
-        w="100%"
-        onClick={() => navigate(RoutesEnum.USER_REGISTRATION)}
-      >
-        Cadastrar novos usuários
-      </Button>
+      <Flex justifyContent="end">
+        <Button
+          mt="1.5rem"
+          variant="outline"
+          w="30%"
+          onClick={() => navigate(RoutesEnum.USER_REGISTRATION)}
+        >
+          Cadastrar novos usuários
+        </Button>
+      </Flex>
 
       <SearchModal
         isOpen={searchModalController.isOpen}
