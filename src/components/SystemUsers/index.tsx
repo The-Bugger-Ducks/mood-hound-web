@@ -5,6 +5,8 @@ import userRequests from "../../utils/requests/user.requests";
 import UserInterface from "../../utils/interfaces/user.interface";
 import ConfirmModal from "../ConfirmModal";
 import UpdateRoleModal from "./UpdateRoleModal";
+import RoutesEnum from "../../utils/enums/routes.enum";
+import userRoleHandler from "../../utils/handlers/userRole.handler";
 
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -24,7 +26,6 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import RoutesEnum from "../../utils/enums/routes.enum";
 
 export default function SystemUsers() {
   const toast = useToast();
@@ -151,7 +152,9 @@ export default function SystemUsers() {
           { align: "left", element: newUser.name },
           {
             align: "left",
-            element: <Badge colorScheme="teal">{newUser.role}</Badge>,
+            element: (
+              <Badge colorScheme="teal">{userRoleHandler(newUser.role)}</Badge>
+            ),
           },
           {
             align: "left",

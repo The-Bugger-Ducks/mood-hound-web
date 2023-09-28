@@ -4,6 +4,7 @@ import UserRoleEnum from "../../utils/enums/userRole.enum";
 import ConfirmModal from "../../components/ConfirmModal";
 import userRequests from "../../utils/requests/user.requests";
 import RoutesEnum from "../../utils/enums/routes.enum";
+import userRoleHandler from "../../utils/handlers/userRole.handler";
 
 import { MdArrowBack } from "react-icons/md";
 import { useState } from "react";
@@ -15,7 +16,6 @@ import {
   HStack,
   Icon,
   Text,
-  VStack,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -177,8 +177,14 @@ export default function UserRegistration() {
             onChange={setRole}
             value={role}
             options={[
-              { value: UserRoleEnum.ADMIN, label: "ADMIN" },
-              { value: UserRoleEnum.VIEWER, label: "VIEWER" },
+              {
+                value: UserRoleEnum.ADMIN,
+                label: userRoleHandler(UserRoleEnum.ADMIN),
+              },
+              {
+                value: UserRoleEnum.VIEWER,
+                label: userRoleHandler(UserRoleEnum.VIEWER),
+              },
             ]}
           />
         </HStack>
