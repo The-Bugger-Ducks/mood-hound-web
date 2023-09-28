@@ -221,15 +221,20 @@ export default function UserRegistration() {
         </HStack>
       </Card>
 
-      <VStack spacing="2rem" mt="1.5rem">
-        <Button w="100%" type="submit">
-          Cadastrar usuário
-        </Button>
-
-        <Button variant="outline" w="100%" onClick={confirmRefresh.onOpen}>
+      <HStack spacing="2rem" mt="1.5rem">
+        <Button
+          variant="outline"
+          size="lg"
+          w="100%"
+          onClick={confirmRefresh.onOpen}
+        >
           Redefinir dados inseridos
         </Button>
-      </VStack>
+
+        <Button size="lg" w="100%" type="submit">
+          Cadastrar usuário
+        </Button>
+      </HStack>
 
       <ConfirmModal
         title="ATENÇÃO"
