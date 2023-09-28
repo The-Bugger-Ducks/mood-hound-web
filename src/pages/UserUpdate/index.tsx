@@ -249,15 +249,20 @@ export default function UserUpdate() {
         </HStack>
       </Card>
 
-      <VStack spacing="2rem" mt="1.5rem">
-        <Button w="100%" type="submit">
-          Atualizar informações
-        </Button>
-
-        <Button variant="outline" w="100%" onClick={confirmRefresh.onOpen}>
+      <HStack spacing="2rem" mt="1.5rem">
+        <Button
+          size="lg"
+          variant="outline"
+          w="100%"
+          onClick={confirmRefresh.onOpen}
+        >
           Redefinir para dados cadastrados
         </Button>
-      </VStack>
+
+        <Button size="lg" w="100%" type="submit">
+          Atualizar informações
+        </Button>
+      </HStack>
 
       <ConfirmModal
         title="ATENÇÃO"
