@@ -1,6 +1,7 @@
 import SearchModalProps from "./props";
 import SelectInput from "../../SelectInput";
 import UserRoleEnum from "../../../utils/enums/userRole.enum";
+import userRoleHandler from "../../../utils/handlers/userRole.handler";
 
 import { FC, useState } from "react";
 import {
@@ -61,8 +62,14 @@ const UpdateRoleModal: FC<SearchModalProps> = ({
                   onChange={setRole}
                   isRequired={true}
                   options={[
-                    { value: UserRoleEnum.ADMIN, label: "ADMIN" },
-                    { value: UserRoleEnum.VIEWER, label: "VIEWER" },
+                    {
+                      value: UserRoleEnum.ADMIN,
+                      label: userRoleHandler(UserRoleEnum.ADMIN),
+                    },
+                    {
+                      value: UserRoleEnum.VIEWER,
+                      label: userRoleHandler(UserRoleEnum.VIEWER),
+                    },
                   ]}
                 />
               </VStack>
