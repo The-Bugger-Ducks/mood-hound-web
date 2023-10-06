@@ -21,6 +21,7 @@ export interface RowInterface {
 }
 
 export interface CellInteface {
+  id: string | number;
   align?: "left" | "inherit" | "center" | "justify" | "right";
   element?: JSX.Element | string;
   fontColor?: string;

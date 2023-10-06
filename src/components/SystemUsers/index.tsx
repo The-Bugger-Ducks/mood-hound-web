@@ -149,18 +149,21 @@ export default function SystemUsers() {
     newUsers.forEach((newUser) => {
       newSystemUsersTableRows.push({
         cells: [
-          { align: "left", element: newUser.name },
+          { id: `name_${newUser.id}`, align: "left", element: newUser.name },
           {
+            id: `role_${newUser.id}`,
             align: "left",
             element: (
               <Badge colorScheme="teal">{userRoleHandler(newUser.role)}</Badge>
             ),
           },
           {
+            id: `email_${newUser.id}`,
             align: "left",
             element: newUser.email,
           },
           {
+            id: `role_${newUser.id}`,
             align: "left",
             element: (
               <>

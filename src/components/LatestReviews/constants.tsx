@@ -4,8 +4,8 @@ export const takeReviewsTable = 7;
 
 export const lastReviewsTableHeader: RowInterface = {
   cells: [
-    { align: "left", element: "Data" },
-    { align: "left", element: "Temas" },
-    { align: "left", element: "Descrição" },
+    { id: "date", align: "left", element: "Data" },
+    { id: "themes", align: "left", element: "Temas" },
+    { id: "description", align: "left", element: "Descrição" },
   ],
 };

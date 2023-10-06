@@ -89,9 +89,9 @@ const Table: FC<TableProps> = ({
             >
               <TableHead>
                 <TableRow sx={{ tr: { border: 1, borderColor: "#E2E8F0" } }}>
-                  {header.cells.map((row, index) => (
+                  {header.cells.map((row) => (
                     <StyledTableCell
-                      key={"header" + index}
+                      key={row.id}
                       align={row.align ?? "left"}
                       sx={
                         withEllipsisInRows
