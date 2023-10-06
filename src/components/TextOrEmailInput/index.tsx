@@ -82,7 +82,7 @@ const TextOrEmailInput: FC<TextOrEmailInputProps> = ({
             }
           }}
           type={showValue ? inputType ?? "text" : "password"}
-          placeholder={placeholder ? placeholder : "Insira um valor..."}
+          placeholder={placeholder ?? "Insira um valor..."}
           disabled={isDisabled ?? false}
           defaultValue={defaultValue ?? ""}
           value={value}
