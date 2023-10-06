@@ -92,7 +92,10 @@ export default function LatestReviews() {
     newComments.forEach((newComment) => {
       newLastReviewsTableRows.push({
         cells: [
-          { align: "left", element: moment(newComment.createdAt).format("l") },
+          {
+            align: "left",
+            element: moment(newComment.createdAt).format("DD/MM/YYYY"),
+          },
           {
             align: "left",
             element: (
