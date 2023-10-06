@@ -32,7 +32,7 @@ const MenuWithIcon: FC<MenuWithIconProps> = ({
         }
       />
       <MenuList>
-        {options.map((option, index) => (
+        {options.map((option) => (
           <MenuItem key={option.id} onClick={option.onClick}>
             {option.iconConfig && (
               <Icon

@@ -4,11 +4,11 @@ import UserRoleEnum from "../../utils/enums/userRole.enum";
 import ConfirmModal from "../../components/ConfirmModal";
 import userRequests from "../../utils/requests/user.requests";
 import RoutesEnum from "../../utils/enums/routes.enum";
-import userRoleHandler from "../../utils/handlers/userRole.handler";
 
 import { MdArrowBack } from "react-icons/md";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { userRoleOptions } from "./constants";
 
 import {
   Button,
@@ -176,16 +176,7 @@ export default function UserRegistration() {
             defaultValue={defaultRole}
             onChange={setRole}
             value={role}
-            options={[
-              {
-                value: UserRoleEnum.ADMIN,
-                label: userRoleHandler(UserRoleEnum.ADMIN),
-              },
-              {
-                value: UserRoleEnum.VIEWER,
-                label: userRoleHandler(UserRoleEnum.VIEWER),
-              },
-            ]}
+            options={userRoleOptions}
           />
         </HStack>
 

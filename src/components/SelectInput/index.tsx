@@ -45,8 +45,8 @@ const SelectInput: FC<SelectInputProps> = ({
           size={size ?? "lg"}
           value={value}
         >
-          {options.map((option, index) => (
-            <option value={option.value} key={index}>
+          {options.map((option) => (
+            <option value={option.value} key={option.id}>
               {option.label}
             </option>
           ))}

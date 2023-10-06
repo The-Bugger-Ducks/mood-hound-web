@@ -1,14 +1,13 @@
 import TextOrEmailInput from "../../components/TextOrEmailInput";
 import SelectInput from "../../components/SelectInput";
-import UserRoleEnum from "../../utils/enums/userRole.enum";
 import ConfirmModal from "../../components/ConfirmModal";
 import userRequests from "../../utils/requests/user.requests";
 import RoutesEnum from "../../utils/enums/routes.enum";
-import userRoleHandler from "../../utils/handlers/userRole.handler";
 
 import { useNavigate } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import { useEffect, useState } from "react";
+import { userRoleOptions } from "./constant";
 
 import {
   Button,
@@ -206,16 +205,7 @@ export default function UserUpdate() {
             defaultValue={defaultRole}
             onChange={setRole}
             value={role}
-            options={[
-              {
-                value: UserRoleEnum.ADMIN,
-                label: userRoleHandler(UserRoleEnum.ADMIN),
-              },
-              {
-                value: UserRoleEnum.VIEWER,
-                label: userRoleHandler(UserRoleEnum.VIEWER),
-              },
-            ]}
+            options={userRoleOptions}
           />
         </HStack>
 
