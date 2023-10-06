@@ -23,13 +23,15 @@ export default function UserUpdate() {
   const navigate = useNavigate();
   const toast = useToast();
   const confirmRefresh = useDisclosure();
+
+  const defaultPassword = "";
+  const defaultConfirmPassword = "";
+
   const [userId, setUserId] = useState("");
 
   const [defaultName, setDefaultName] = useState("");
   const [defaultRole, setDefaultRole] = useState("");
   const [defaultEmail, setDefaultEmail] = useState("");
-  const [defaultPassword, setDefaultPassword] = useState("");
-  const [defaultConfirmPassword, setDefaultConfirmPassword] = useState("");
 
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
