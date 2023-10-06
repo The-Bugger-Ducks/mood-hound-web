@@ -36,6 +36,22 @@ const Table: FC<TableProps> = ({
 }) => {
   const [isLargerThan800h] = useMediaQuery("(min-height: 800px)");
 
+  const calculateMaxHeight = () => {
+    if (paginationController) {
+      if (maxHeight) {
+        return maxHeight.withPagination;
+      }
+
+      return isLargerThan800h ? "30rem" : "20rem";
+    }
+
+    if (maxHeight) {
+      return maxHeight.withoutPagination;
+    }
+
+    return isLargerThan800h ? "35rem" : "25rem";
+  };
+
   return (
     <ThemeProvider theme={muiTheme}>
       <ChakraProvider theme={chakraTheme}>
@@ -61,17 +77,7 @@ const Table: FC<TableProps> = ({
               },
             }}
             style={{
-              maxHeight: paginationController
-                ? maxHeight
-                  ? maxHeight.withPagination
-                  : isLargerThan800h
-                  ? "30rem"
-                  : "20rem"
-                : maxHeight
-                ? maxHeight.withPagination
-                : isLargerThan800h
-                ? "35rem"
-                : "25rem",
+              maxHeight: calculateMaxHeight(),
               marginBottom: "1rem",
             }}
           >
