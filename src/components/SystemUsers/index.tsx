@@ -148,6 +148,7 @@ export default function SystemUsers() {
 
     newUsers.forEach((newUser) => {
       newSystemUsersTableRows.push({
+        id: `header_${newUser.id}`,
         cells: [
           { id: `name_${newUser.id}`, align: "left", element: newUser.name },
           {

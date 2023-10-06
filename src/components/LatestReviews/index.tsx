@@ -91,6 +91,7 @@ export default function LatestReviews() {
 
     newComments.forEach((newComment) => {
       newLastReviewsTableRows.push({
+        id: `header_${newComment.id}`,
         cells: [
           {
             id: `date_${newComment.id}`,

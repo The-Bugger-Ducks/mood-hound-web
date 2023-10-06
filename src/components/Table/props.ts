@@ -17,6 +17,7 @@ export default interface TableProps {
 }
 
 export interface RowInterface {
+  id: string | number;
   cells: CellInteface[];
 }
 

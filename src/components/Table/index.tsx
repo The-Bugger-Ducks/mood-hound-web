@@ -154,14 +154,14 @@ const Table: FC<TableProps> = ({
                   </StyledTableRow>
                 )}
 
-                {rows.map((row, rowIndex) => (
+                {rows.map((row) => (
                   <StyledTableRow
-                    key={"row" + rowIndex}
+                    key={row.id}
                     sx={{ tr: { border: 1, borderColor: "#E2E8F0" } }}
                   >
-                    {row.cells.map((cell, cellIndex) => (
+                    {row.cells.map((cell) => (
                       <TableCell
-                        key={"row" + rowIndex + "cell" + cellIndex}
+                        key={`${row.id}_${cell.id}`}
                         sx={
                           withEllipsisInRows
                             ? {
