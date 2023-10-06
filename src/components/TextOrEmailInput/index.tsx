@@ -52,7 +52,7 @@ const TextOrEmailInput: FC<TextOrEmailInputProps> = ({
 
   return (
     <FormControl
-      isRequired={isRequired ? isRequired : false}
+      isRequired={isRequired}
       isInvalid={invalidController ? invalidController.isInvalid : false}
     >
       {label && <FormLabel>{label}</FormLabel>}
