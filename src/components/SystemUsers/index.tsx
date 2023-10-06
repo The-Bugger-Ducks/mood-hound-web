@@ -164,7 +164,7 @@ export default function SystemUsers() {
             element: newUser.email,
           },
           {
-            id: `role_${newUser.id}`,
+            id: `updateRole_${newUser.id}`,
             align: "left",
             element: (
               <>
