@@ -12,6 +12,7 @@ import { userRoleOptions } from "./constant";
 import {
   Button,
   Card,
+  Flex,
   HStack,
   Icon,
   Text,
@@ -192,7 +193,7 @@ export default function UserUpdate() {
       </HStack>
 
       <Card p="3rem" variant="outline" gap="2rem">
-        <HStack spacing="2rem">
+        <Flex gap="2rem" flexDir={["column", "column", "row"]}>
           <TextOrEmailInput
             isRequired
             label="Nome do usuário"
@@ -209,7 +210,7 @@ export default function UserUpdate() {
             value={role}
             options={userRoleOptions}
           />
-        </HStack>
+        </Flex>
 
         <TextOrEmailInput
           isRequired
@@ -220,7 +221,7 @@ export default function UserUpdate() {
           value={email}
         />
 
-        <HStack spacing="2rem">
+        <Flex gap="2rem" flexDir={["column", "column", "row"]}>
           <TextOrEmailInput
             inputMode="alternateVisibility"
             label="Senha"
@@ -244,23 +245,23 @@ export default function UserUpdate() {
               invalidMessage: errorConfirmPassword.messageError,
             }}
           />
-        </HStack>
+        </Flex>
       </Card>
 
-      <HStack spacing="2rem" mt="1.5rem">
+      <Flex gap="2rem" mt="1.5rem" flexDir={["column", "column", "row"]}>
         <Button
           size="lg"
           variant="outline"
           w="100%"
           onClick={confirmRefresh.onOpen}
         >
-          Redefinir para dados cadastrados
+          Redefinir
         </Button>
 
         <Button size="lg" w="100%" type="submit">
           Atualizar informações
         </Button>
-      </HStack>
+      </Flex>
 
       <ConfirmModal
         title="ATENÇÃO"
