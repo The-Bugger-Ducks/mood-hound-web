@@ -1,10 +1,11 @@
 import { RowInterface } from "../../components/Table/props";
 
 export const systemUsersTableHeader: RowInterface = {
+  id: "systemUsersTableHeader",
   cells: [
-    { align: "left", element: "Nome" },
-    { align: "left", element: "Privilégio" },
-    { align: "left", element: "E-mail" },
-    { align: "left", element: "Ações" },
+    { align: "left", element: "Nome", id: "name" },
+    { align: "left", element: "Privilégio", id: "role" },
+    { align: "left", element: "E-mail", id: "email" },
+    { align: "left", element: "Ações", id: "actions" },
   ],
 };

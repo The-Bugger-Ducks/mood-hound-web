@@ -1,6 +1,6 @@
 import { CommentTopicEnum } from "../enums/commentTopic.enum";
 
-export default interface reqCommentsFilter {
+export default interface ReqCommentsFilterInterface {
   comment?: string;
   topic?: CommentTopicEnum;
   dateStart?: Date;

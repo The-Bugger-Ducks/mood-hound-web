@@ -91,12 +91,15 @@ export default function LatestReviews() {
 
     newComments.forEach((newComment) => {
       newLastReviewsTableRows.push({
+        id: `header_${newComment.id}`,
         cells: [
           {
+            id: `date_${newComment.id}`,
             align: "left",
             element: moment(newComment.createdAt).format("DD/MM/YYYY"),
           },
           {
+            id: `theme_${newComment.id}`,
             align: "left",
             element: (
               <Badge
@@ -107,6 +110,7 @@ export default function LatestReviews() {
             ),
           },
           {
+            id: `description_${newComment.id}`,
             align: "left",
             element: <Text title={newComment.text}>{newComment.text}</Text>,
           },

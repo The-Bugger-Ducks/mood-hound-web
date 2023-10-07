@@ -17,10 +17,12 @@ export default interface TableProps {
 }
 
 export interface RowInterface {
+  id: string | number;
   cells: CellInteface[];
 }
 
 export interface CellInteface {
+  id: string | number;
   align?: "left" | "inherit" | "center" | "justify" | "right";
   element?: JSX.Element | string;
   fontColor?: string;

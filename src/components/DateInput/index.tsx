@@ -31,7 +31,7 @@ const DateInput: FC<DateInputProps> = ({
 
   return (
     <FormControl
-      isRequired={isRequired ? isRequired : false}
+      isRequired={isRequired}
       isInvalid={invalidController ? invalidController.isInvalid : false}
     >
       {label && <FormLabel>{label}</FormLabel>}

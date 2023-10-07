@@ -21,8 +21,13 @@ const Header: FC = () => {
   const searchOptions = useContext(SearchContext);
 
   const options = [
-    { label: "Meu perfil", onClick: () => openMyProfile() },
-    { label: "Sair", onClick: () => signout(), iconConfig: { icon: MdLogout } },
+    { id: "myProfile", label: "Meu perfil", onClick: () => openMyProfile() },
+    {
+      id: "logout",
+      label: "Sair",
+      onClick: () => signout(),
+      iconConfig: { icon: MdLogout },
+    },
   ];
 
   const openMyProfile = () => {

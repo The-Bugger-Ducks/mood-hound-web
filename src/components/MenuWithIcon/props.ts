@@ -7,6 +7,7 @@ export default interface MenuWithIcon {
 }
 
 interface MenuOption {
+  id: string | number;
   label: string;
   iconConfig?: { icon: IconType; boxSize?: string; color?: string };
   onClick: () => void;
