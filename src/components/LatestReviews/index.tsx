@@ -96,7 +96,7 @@ export default function LatestReviews() {
           {
             id: `date_${newComment.id}`,
             align: "left",
-            element: moment(newComment.createdAt).format("l"),
+            element: moment(newComment.createdAt).format("DD/MM/YYYY"),
           },
           {
             id: `theme_${newComment.id}`,
