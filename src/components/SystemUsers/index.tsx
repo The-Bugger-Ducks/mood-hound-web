@@ -226,7 +226,7 @@ export default function SystemUsers() {
         <Button
           mt="1.5rem"
           variant="outline"
-          w="30%"
+          w={["100%", "50%", "30%"]}
           onClick={() => navigate(RoutesEnum.USER_REGISTRATION)}
         >
           Cadastrar novos usuários
