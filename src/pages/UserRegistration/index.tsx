@@ -13,6 +13,7 @@ import { userRoleOptions } from "./constants";
 import {
   Button,
   Card,
+  Flex,
   HStack,
   Icon,
   Text,
@@ -160,8 +161,13 @@ export default function UserRegistration() {
         </Text>
       </HStack>
 
-      <Card p="3rem" variant="outline" gap="2rem">
-        <HStack spacing="2rem">
+      <Card
+        p={["0rem", "3rem", "3rem"]}
+        variant={["unstyled", "outline", "outline"]}
+        bg={["transparent", "whiteAlpha.900", "whiteAlpha.900"]}
+        gap="2rem"
+      >
+        <Flex gap="2rem" flexDir={["column", "column", "row"]}>
           <TextOrEmailInput
             isRequired
             label="Nome do usuário"
@@ -178,7 +184,7 @@ export default function UserRegistration() {
             value={role}
             options={userRoleOptions}
           />
-        </HStack>
+        </Flex>
 
         <TextOrEmailInput
           isRequired
@@ -189,7 +195,7 @@ export default function UserRegistration() {
           value={email}
         />
 
-        <HStack spacing="2rem">
+        <Flex gap="2rem" flexDir={["column", "column", "row"]}>
           <TextOrEmailInput
             isRequired
             inputMode="alternateVisibility"
@@ -215,23 +221,27 @@ export default function UserRegistration() {
               invalidMessage: errorConfirmPassword.messageError,
             }}
           />
-        </HStack>
+        </Flex>
       </Card>
 
-      <HStack spacing="2rem" mt="1.5rem">
+      <Flex
+        gap="2rem"
+        mt={["2.5rem", "1.5rem", "1.5rem"]}
+        flexDir={["column", "column", "row"]}
+      >
         <Button
           variant="outline"
           size="lg"
           w="100%"
           onClick={confirmRefresh.onOpen}
         >
-          Redefinir dados inseridos
+          Redefinir
         </Button>
 
         <Button size="lg" w="100%" type="submit">
           Cadastrar usuário
         </Button>
-      </HStack>
+      </Flex>
 
       <ConfirmModal
         title="ATENÇÃO"

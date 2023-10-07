@@ -192,7 +192,12 @@ export default function UserUpdate() {
         </Text>
       </HStack>
 
-      <Card p="3rem" variant="outline" gap="2rem">
+      <Card
+        p={["0rem", "3rem", "3rem"]}
+        variant={["unstyled", "outline", "outline"]}
+        bg={["transparent", "whiteAlpha.900", "whiteAlpha.900"]}
+        gap="2rem"
+      >
         <Flex gap="2rem" flexDir={["column", "column", "row"]}>
           <TextOrEmailInput
             isRequired
@@ -248,7 +253,11 @@ export default function UserUpdate() {
         </Flex>
       </Card>
 
-      <Flex gap="2rem" mt="1.5rem" flexDir={["column", "column", "row"]}>
+      <Flex
+        gap="2rem"
+        mt={["2.5rem", "1.5rem", "1.5rem"]}
+        flexDir={["column", "column", "row"]}
+      >
         <Button
           size="lg"
           variant="outline"
