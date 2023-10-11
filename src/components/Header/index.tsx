@@ -30,7 +30,14 @@ const Header: FC = () => {
   };
 
   return (
-    <Flex position="sticky" zIndex={999} w="100%" top="0">
+    <Flex
+      position="sticky"
+      zIndex={999}
+      w="100%"
+      top="0"
+      p="2.5rem 0"
+      bg="gray.50"
+    >
       <Image src={logo} />
 
       <Spacer />
