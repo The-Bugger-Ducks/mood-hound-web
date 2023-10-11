@@ -1,24 +1,19 @@
 import logo from "../../assets/images/logo.svg";
 
-import TextOrEmailInput from "../TextOrEmailInput";
 import MenuWithIcon from "../MenuWithIcon";
 import RoutesEnum from "../../utils/enums/routes.enum";
 
-import { FC, useContext, useState } from "react";
+import { FC } from "react";
 import { MdLogout } from "react-icons/md";
-import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
-import { HStack, Image } from "@chakra-ui/react";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { Flex, Image, Spacer } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../contexts/SearchContext";
 import { useAuth } from "../../hooks/useAuth";
 
 const Header: FC = () => {
   const { signout } = useAuth();
 
   const navigate = useNavigate();
-
-  const [valueToSearch, setValueToSearch] = useState("");
-  const searchOptions = useContext(SearchContext);
 
   const options = [
     { id: "myProfile", label: "Meu perfil", onClick: () => openMyProfile() },
@@ -34,21 +29,11 @@ const Header: FC = () => {
     navigate(RoutesEnum.USER_UPDATE);
   };
 
-  const search = () => {
-    if (!searchOptions) return;
-    searchOptions.updateValueToSearch(valueToSearch);
-  };
-
   return (
-    <HStack position="sticky" zIndex={999} w="100%" top="0" spacing="1.5rem">
+    <Flex position="sticky" zIndex={999} w="100%" top="0">
       <Image src={logo} />
 
-      <TextOrEmailInput
-        iconLeftAddon={BsSearch}
-        placeholder="Pesquise por um comentário..."
-        onChange={setValueToSearch}
-        onEnter={search}
-      />
+      <Spacer />
 
       <MenuWithIcon
         mainIcon={{
@@ -58,7 +43,7 @@ const Header: FC = () => {
         }}
         options={options}
       />
-    </HStack>
+    </Flex>
   );
 };
 

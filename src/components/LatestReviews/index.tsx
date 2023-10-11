@@ -3,8 +3,8 @@ import moment from "moment";
 import queryCommentsProcessor from "../../utils/processors/queryComments.processor";
 import CommentInterface from "../../utils/interfaces/comment.interface";
 import SearchModal from "./SearchModal";
+import commentSentimentHandler from "../../utils/handlers/commentSentiment.handler";
 
-import { useSearch } from "../../hooks/useSearch";
 import { useEffect, useState } from "react";
 import { BiSlider } from "react-icons/bi";
 import { RowInterface } from "../Table/props";
@@ -22,17 +22,15 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import commentSentimentHandler from "../../utils/handlers/commentSentiment.handler";
 
 export default function LatestReviews() {
   const toast = useToast();
   const searchModalController = useDisclosure();
 
-  const { valueToSearch } = useSearch();
-
   const [topic, setTopic] = useState<CommentTopicEnum | undefined>();
   const [dateStart, setDateStart] = useState<Date | undefined>();
   const [dateEnd, setDateEnd] = useState<Date | undefined>();
+  const [valueToSearch, setValueToSearch] = useState<string | undefined>();
 
   const [cursor, setCursor] = useState<string | undefined>();
   const [hasNextPage, setHasNextPage] = useState<boolean>(true);
@@ -52,7 +50,8 @@ export default function LatestReviews() {
       hasNextPage: goToNextPage,
       hasPreviousPage: goToPreviousPage,
     },
-    { comment: valueToSearch, dateDone: dateEnd, dateStart: dateStart, topic }
+    { comment: valueToSearch, dateDone: dateEnd, dateStart: dateStart, topic },
+    { retry: false, refetchOnWindowFocus: false }
   );
 
   useEffect(() => {
@@ -124,11 +123,13 @@ export default function LatestReviews() {
   const applyFilters = (
     newTopic?: CommentTopicEnum,
     newDateStart?: Date,
-    newDateEnd?: Date
+    newDateEnd?: Date,
+    newValueToSearch?: string
   ) => {
     setTopic(newTopic);
     setDateStart(newDateStart);
     setDateEnd(newDateEnd);
+    setValueToSearch(newValueToSearch);
   };
 
   return (
