@@ -1,6 +1,6 @@
 import api from "../../services/api.service";
 import EndpointsEnum from "../enums/endpoints.enum";
-import ReqReviewAnalysisInterface from "../interfaces/reqReviewAnalysis.interface";
+import ReqReviewAnalysisInterface from "../interfaces/reviewAnalysis.interface";
 
 class ReviewAnalysis {
   async getAnalysis() {

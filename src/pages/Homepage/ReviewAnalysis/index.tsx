@@ -2,7 +2,7 @@ import EvolutionTopics from "../../../components/EvolutionTopics";
 import LatestReviews from "../../../components/LatestReviews";
 import MostDiscussedTopics from "../../../components/MostDiscussedTopics";
 import ReviewsByState from "../../../components/ReviewsByState";
-import ReqReviewAnalysisInterface from "../../../utils/interfaces/reqReviewAnalysis.interface";
+import ReviewAnalysisInterface from "../../../utils/interfaces/reviewAnalysis.interface";
 import reviewAnalysisRequests from "../../../utils/requests/reviewAnalysis.requests";
 
 import { useEffect, useState } from "react";
@@ -10,7 +10,11 @@ import { Flex, useToast } from "@chakra-ui/react";
 
 export default function ReviewAnalysis() {
   const toast = useToast();
-  const [analysis, setAnalysis] = useState<ReqReviewAnalysisInterface>();
+
+  const [analysis, setAnalysis] = useState<ReviewAnalysisInterface>({
+    rankingOfTopics: [],
+    timeSeriesDataTopic: [],
+  });
 
   useEffect(() => {
     getAnalysis();
@@ -39,7 +43,7 @@ export default function ReviewAnalysis() {
         flexDirection={["column", "column", "row"]}
         gap={["0", "0", "2rem"]}
       >
-        <MostDiscussedTopics />
+        <MostDiscussedTopics data={analysis.rankingOfTopics} />
         <EvolutionTopics />
       </Flex>
 
