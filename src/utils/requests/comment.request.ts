@@ -1,6 +1,7 @@
 import api from "../../services/api.service";
 import EndpointsEnum from "../enums/endpoints.enum";
 import CommentPageInterface from "../interfaces/commentPage.interface";
+import MetaInterface from "../interfaces/meta.interface";
 import ReqCommentsFilterInterface from "../interfaces/reqCommentsFilter.interface";
 
 class CommentRequests {

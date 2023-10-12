@@ -1,4 +1,4 @@
-interface MetaInterface {
+export default interface MetaInterface {
   take: number;
   hasPreviousPage?: boolean;
   hasNextPage?: boolean;
