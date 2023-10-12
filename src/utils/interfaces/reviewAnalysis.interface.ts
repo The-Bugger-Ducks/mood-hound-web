@@ -5,9 +5,9 @@ export default interface ReviewAnalysisInterface {
 
 export interface RankingOfTopicsInterface
   extends Array<{
-    value: string;
+    value: number;
     label: string;
   }> {}
 
 export interface TimeSeriesDataTopicInterface
-  extends Array<{ month: Date; sentiment: string; total: number }> {}
+  extends Array<{ month: string; sentiment: string; total: number }> {}

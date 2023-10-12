@@ -22,7 +22,7 @@ const MostDiscussedTopics: FC<MostDiscussedTopicsProps> = ({ data }) => {
       newRows.push({
         id: `mostDiscussedTopicsTable_${index}`,
         cells: [
-          { id: `position_${index}`, align: "left", element: `# ${index}` },
+          { id: `position_${index}`, align: "left", element: `# ${index + 1}` },
           { id: `theme_${index}`, align: "left", element: infoToShow.label },
         ],
       });

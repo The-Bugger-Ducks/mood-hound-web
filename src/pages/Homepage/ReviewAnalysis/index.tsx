@@ -44,7 +44,7 @@ export default function ReviewAnalysis() {
         gap={["0", "0", "2rem"]}
       >
         <MostDiscussedTopics data={analysis.rankingOfTopics} />
-        <EvolutionTopics />
+        <EvolutionTopics data={analysis.timeSeriesDataTopic} />
       </Flex>
 
       <ReviewsByState />
