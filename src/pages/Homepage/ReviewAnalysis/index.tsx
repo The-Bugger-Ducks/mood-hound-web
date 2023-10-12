@@ -3,6 +3,7 @@ import { Flex } from "@chakra-ui/react";
 import EvolutionTopics from "../../../components/EvolutionTopics";
 import LatestReviews from "../../../components/LatestReviews";
 import MostDiscussedTopics from "../../../components/MostDiscussedTopics";
+import ReviewsByState from "../../../components/ReviewsByState";
 
 export default function ReviewAnalysis() {
   return (
@@ -14,6 +15,8 @@ export default function ReviewAnalysis() {
         <MostDiscussedTopics />
         <EvolutionTopics />
       </Flex>
+
+      <ReviewsByState />
 
       <LatestReviews />
     </>
