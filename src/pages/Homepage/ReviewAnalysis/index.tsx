@@ -14,6 +14,7 @@ export default function ReviewAnalysis() {
   const [analysis, setAnalysis] = useState<ReviewAnalysisInterface>({
     rankingOfTopics: [],
     timeSeriesDataTopic: [],
+    commentsPerState: [],
   });
 
   useEffect(() => {
@@ -47,7 +48,7 @@ export default function ReviewAnalysis() {
         <EvolutionTopics data={analysis.timeSeriesDataTopic} />
       </Flex>
 
-      <ReviewsByState />
+      <ReviewsByState data={analysis.commentsPerState} />
 
       <LatestReviews />
     </>

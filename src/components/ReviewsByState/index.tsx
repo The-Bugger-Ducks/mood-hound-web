@@ -1,15 +1,10 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
 import GeoChart from "../GeoChart";
+import ReviewsByStateProps from "./props";
 
-export default function ReviewsByState() {
-  const data = [
-    ["State", "Avaliações"],
-    ["BR-SP", 30000],
-    ["BR-RJ", 1000],
-    ["BR-PE", 500],
-    ["BR-AM", 100],
-  ];
+import { FC } from "react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 
+const ReviewsByState: FC<ReviewsByStateProps> = ({ data }) => {
   return (
     <Box m="2rem 0" p="0" bg="transparent" w="100%">
       <Flex>
@@ -19,4 +14,6 @@ export default function ReviewsByState() {
       <GeoChart data={data} />
     </Box>
   );
-}
+};
+
+export default ReviewsByState;

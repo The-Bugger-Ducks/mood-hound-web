@@ -1,6 +1,7 @@
 export default interface ReviewAnalysisInterface {
   rankingOfTopics: RankingOfTopicsInterface;
   timeSeriesDataTopic: TimeSeriesDataTopicInterface;
+  commentsPerState: CommentsPerStateInterface;
 }
 
 export interface RankingOfTopicsInterface
@@ -11,3 +12,5 @@ export interface RankingOfTopicsInterface
 
 export interface TimeSeriesDataTopicInterface
   extends Array<{ month: string; sentiment: string; total: number }> {}
+
+export interface CommentsPerStateInterface extends Array<any[]> {}
