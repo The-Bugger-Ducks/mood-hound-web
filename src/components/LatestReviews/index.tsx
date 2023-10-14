@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { BiSlider } from "react-icons/bi";
 import { RowInterface } from "../Table/props";
 import { CommentTopicEnum } from "../../utils/enums/commentTopic.enum";
-import { lastReviewsTableHeader, takeReviewsTable } from "./constants";
+import { lastReviewsTableHeader, limitReviewsTable } from "./constants";
 
 import {
   Badge,
@@ -32,12 +32,9 @@ export default function LatestReviews() {
   const [dateEnd, setDateEnd] = useState<Date | undefined>();
   const [valueToSearch, setValueToSearch] = useState<string | undefined>();
 
-  const [cursor, setCursor] = useState<string | undefined>();
-  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
-  const [hasPreviousPage, setHasPreviousPage] = useState<boolean>(false);
-
-  const [goToNextPage, setGoToNextPage] = useState<boolean>(true);
-  const [goToPreviousPage, setGoToPreviousPage] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [hasNextPage, setHasNextPage] = useState<boolean>();
+  const [hasPreviousPage, setHasPreviousPage] = useState<boolean>();
 
   const [lastReviewsTableRows, setLastReviewsTableRows] = useState<
     RowInterface[]
@@ -45,10 +42,8 @@ export default function LatestReviews() {
 
   const responseQueryCommentsProcessor = queryCommentsProcessor(
     {
-      take: takeReviewsTable,
-      cursor,
-      hasNextPage: goToNextPage,
-      hasPreviousPage: goToPreviousPage,
+      limit: limitReviewsTable,
+      page,
     },
     { comment: valueToSearch, dateDone: dateEnd, dateStart: dateStart, topic },
     { retry: false, refetchOnWindowFocus: false }
@@ -60,7 +55,7 @@ export default function LatestReviews() {
 
   useEffect(() => {
     getComments();
-  }, [valueToSearch, topic, dateStart, dateEnd]);
+  }, [valueToSearch, topic, dateStart, dateEnd, page]);
 
   const getComments = async () => {
     const response = await responseQueryCommentsProcessor.refetch();
@@ -78,9 +73,8 @@ export default function LatestReviews() {
 
     const comments = response.data;
 
-    setCursor(comments.meta.cursor);
-    setHasNextPage(comments.meta.hasNextPage ?? true);
-    setHasPreviousPage(comments.meta.hasPreviousPage ?? false);
+    setHasNextPage(comments.meta.hasNextPage);
+    setHasPreviousPage(comments.meta.hasPreviousPage);
 
     refreshTable(comments.data);
   };
@@ -126,6 +120,7 @@ export default function LatestReviews() {
     newDateEnd?: Date,
     newValueToSearch?: string
   ) => {
+    setPage(1);
     setTopic(newTopic);
     setDateStart(newDateStart);
     setDateEnd(newDateEnd);
@@ -168,10 +163,7 @@ export default function LatestReviews() {
               return;
             }
 
-            setGoToNextPage(true);
-            setGoToPreviousPage(false);
-
-            getComments();
+            setPage(page + 1);
           },
           onPreviousPage: () => {
             if (!hasPreviousPage) {
@@ -185,10 +177,7 @@ export default function LatestReviews() {
               return;
             }
 
-            setGoToNextPage(false);
-            setGoToPreviousPage(true);
-
-            getComments();
+            setPage(page - 1);
           },
         }}
       />

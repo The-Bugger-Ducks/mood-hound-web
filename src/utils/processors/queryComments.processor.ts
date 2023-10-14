@@ -1,4 +1,5 @@
 import CommentPageInterface from "../interfaces/commentPage.interface";
+import MetaInterface from "../interfaces/meta.interface";
 import ReqCommentsFilterInterface from "../interfaces/reqCommentsFilter.interface";
 import commentRequests from "../requests/comment.request";
 
