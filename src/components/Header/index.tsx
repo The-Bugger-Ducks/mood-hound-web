@@ -2,6 +2,7 @@ import logo from "../../assets/images/logo.svg";
 
 import MenuWithIcon from "../MenuWithIcon";
 import RoutesEnum from "../../utils/enums/routes.enum";
+import ConfigureDashboardModal from "./ConfigureDashboardModal";
 
 import { FC } from "react";
 import { MdLogout, MdOutlineSettings } from "react-icons/md";
@@ -9,11 +10,12 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Flex, Image, Spacer, useDisclosure } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import { useDashboard } from "../../hooks/useDashboard";
 import { CommentTopicEnum } from "../../utils/enums/commentTopic.enum";
-import ConfigureDashboardModal from "./ConfigureDashboardModal";
 
 const Header: FC = () => {
   const { signout } = useAuth();
+  const { setDateEnd, setDateStart, setState, setTopic } = useDashboard();
 
   const navigate = useNavigate();
   const configureDashboardModalController = useDisclosure();
@@ -44,7 +46,10 @@ const Header: FC = () => {
     dateEnd?: Date,
     state?: string
   ) => {
-    console.log(topic, dateStart, dateEnd, state);
+    setDateEnd(dateEnd);
+    setDateStart(dateStart);
+    setState(state);
+    setTopic(topic);
   };
 
   return (

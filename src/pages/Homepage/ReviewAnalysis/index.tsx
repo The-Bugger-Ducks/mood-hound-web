@@ -7,9 +7,11 @@ import reviewAnalysisRequests from "../../../utils/requests/reviewAnalysis.reque
 
 import { useEffect, useState } from "react";
 import { Flex, useToast } from "@chakra-ui/react";
+import { useDashboard } from "../../../hooks/useDashboard";
 
 export default function ReviewAnalysis() {
   const toast = useToast();
+  const { dateEnd, dateStart, state, topic } = useDashboard();
 
   const [analysis, setAnalysis] = useState<ReviewAnalysisInterface>({
     rankingOfTopics: [],
@@ -21,8 +23,17 @@ export default function ReviewAnalysis() {
     getAnalysis();
   }, []);
 
+  useEffect(() => {
+    getAnalysis();
+  }, [dateEnd, dateStart, state, topic]);
+
   const getAnalysis = async () => {
-    const newAnalysis = await reviewAnalysisRequests.getAnalysis();
+    const newAnalysis = await reviewAnalysisRequests.getAnalysis({
+      dateStart,
+      dateEnd,
+      state,
+      topic,
+    });
 
     if (newAnalysis === "error") {
       toast({

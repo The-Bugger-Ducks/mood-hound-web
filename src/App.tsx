@@ -4,6 +4,7 @@ import chakraTheme from "./assets/themes/chakra.theme";
 import { ChakraProvider } from "@chakra-ui/react";
 import { AuthProvider } from "./contexts/AuthContext";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { DashboardProvider } from "./contexts/DashboardContext";
 
 function App() {
   const queryClient = new QueryClient();
@@ -12,7 +13,9 @@ function App() {
     <ChakraProvider theme={chakraTheme}>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <Routes />
+          <DashboardProvider>
+            <Routes />
+          </DashboardProvider>
         </AuthProvider>
       </QueryClientProvider>
     </ChakraProvider>
