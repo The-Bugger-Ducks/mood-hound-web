@@ -1,17 +1,15 @@
-import CommentSentimentEnum from "../../utils/enums/commentSentiment.enum";
-
 export const defaultConfiguration: any = {
   series: [
     {
-      name: "Positivo",
+      name: "POSITIVE",
       data: [],
     },
     {
-      name: "Negativo",
+      name: "NEGATIVE",
       data: [],
     },
     {
-      name: "Neutro",
+      name: "NEUTRAL",
       data: [],
     },
   ],
