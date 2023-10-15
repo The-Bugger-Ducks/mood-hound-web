@@ -1,8 +1,7 @@
 enum CommentSentimentEnum {
-  POSITIVE = "POSITIVE",
-  NEGATIVE = "NEGATIVE",
-  NEUTRAL = "NEUTRAL",
-  INDETERMINATE = "INDETERMINATE",
+  POSITIVE = "POSITIVO",
+  NEGATIVE = "NEGATIVO",
+  NEUTRAL = "NEUTRO",
 }
 
 export default CommentSentimentEnum;

@@ -1,6 +1,7 @@
 export default interface MetaInterface {
-  take: number;
+  limit: number;
+  page: number;
+  totalPages?: number;
   hasPreviousPage?: boolean;
   hasNextPage?: boolean;
-  cursor?: string;
 }
