@@ -13,7 +13,12 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
     if (data.length) updateChart();
   }, [data]);
 
+  const getDefaultConfiguration = () => {
+    return JSON.parse(JSON.stringify(defaultConfiguration));
+  };
+
   const updateChart = () => {
+    const defaultConfiguration = getDefaultConfiguration();
     const newSeries = defaultConfiguration.series;
 
     data.forEach((informationToShow) => {
