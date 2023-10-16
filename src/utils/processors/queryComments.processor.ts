@@ -1,14 +1,15 @@
 import CommentPageInterface from "../interfaces/commentPage.interface";
-import reqCommentsFilter from "../interfaces/reqCommentsFilter.interface";
+import MetaInterface from "../interfaces/meta.interface";
+import ReqCommentsFilterInterface from "../interfaces/reqCommentsFilter.interface";
 import commentRequests from "../requests/comment.request";
 
 import { ApiServiceErr } from "../types/query.types";
-import { QueryOptions, useQuery } from "react-query";
+import { QueryObserverOptions, useQuery } from "react-query";
 
 const queryCommentsProcessor = (
   payload: MetaInterface,
-  headers: reqCommentsFilter,
-  opt?: QueryOptions<CommentPageInterface>
+  headers: ReqCommentsFilterInterface,
+  opt?: QueryObserverOptions<CommentPageInterface>
 ) =>
   useQuery<CommentPageInterface, ApiServiceErr>(
     [payload, headers],

@@ -1,6 +1,5 @@
 import TextOrEmailInput from "../../components/TextOrEmailInput";
 import SelectInput from "../../components/SelectInput";
-import UserRoleEnum from "../../utils/enums/userRole.enum";
 import ConfirmModal from "../../components/ConfirmModal";
 import userRequests from "../../utils/requests/user.requests";
 import RoutesEnum from "../../utils/enums/routes.enum";
@@ -8,14 +7,15 @@ import RoutesEnum from "../../utils/enums/routes.enum";
 import { useNavigate } from "react-router-dom";
 import { MdArrowBack } from "react-icons/md";
 import { useEffect, useState } from "react";
+import { userRoleOptions } from "./constant";
 
 import {
   Button,
   Card,
+  Flex,
   HStack,
   Icon,
   Text,
-  VStack,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -24,13 +24,15 @@ export default function UserUpdate() {
   const navigate = useNavigate();
   const toast = useToast();
   const confirmRefresh = useDisclosure();
+
+  const defaultPassword = "";
+  const defaultConfirmPassword = "";
+
   const [userId, setUserId] = useState("");
 
   const [defaultName, setDefaultName] = useState("");
   const [defaultRole, setDefaultRole] = useState("");
   const [defaultEmail, setDefaultEmail] = useState("");
-  const [defaultPassword, setDefaultPassword] = useState("");
-  const [defaultConfirmPassword, setDefaultConfirmPassword] = useState("");
 
   const [name, setName] = useState("");
   const [role, setRole] = useState("");
@@ -190,8 +192,13 @@ export default function UserUpdate() {
         </Text>
       </HStack>
 
-      <Card p="3rem" variant="outline" gap="2rem">
-        <HStack spacing="2rem">
+      <Card
+        p={["0rem", "3rem", "3rem"]}
+        variant={["unstyled", "outline", "outline"]}
+        bg={["transparent", "whiteAlpha.900", "whiteAlpha.900"]}
+        gap="2rem"
+      >
+        <Flex gap="2rem" flexDir={["column", "column", "row"]}>
           <TextOrEmailInput
             isRequired
             label="Nome do usuário"
@@ -206,12 +213,9 @@ export default function UserUpdate() {
             defaultValue={defaultRole}
             onChange={setRole}
             value={role}
-            options={[
-              { value: UserRoleEnum.ADMIN, label: "ADMIN" },
-              { value: UserRoleEnum.VIEWER, label: "VIEWER" },
-            ]}
+            options={userRoleOptions}
           />
-        </HStack>
+        </Flex>
 
         <TextOrEmailInput
           isRequired
@@ -222,7 +226,7 @@ export default function UserUpdate() {
           value={email}
         />
 
-        <HStack spacing="2rem">
+        <Flex gap="2rem" flexDir={["column", "column", "row"]}>
           <TextOrEmailInput
             inputMode="alternateVisibility"
             label="Senha"
@@ -246,18 +250,27 @@ export default function UserUpdate() {
               invalidMessage: errorConfirmPassword.messageError,
             }}
           />
-        </HStack>
+        </Flex>
       </Card>
 
-      <VStack spacing="2rem" mt="1.5rem">
-        <Button w="100%" type="submit">
-          Atualizar informações
+      <Flex
+        gap="2rem"
+        mt={["2.5rem", "1.5rem", "1.5rem"]}
+        flexDir={["column", "column", "row"]}
+      >
+        <Button
+          size="lg"
+          variant="outline"
+          w="100%"
+          onClick={confirmRefresh.onOpen}
+        >
+          Redefinir
         </Button>
 
-        <Button variant="outline" w="100%" onClick={confirmRefresh.onOpen}>
-          Redefinir para dados cadastrados
+        <Button size="lg" w="100%" type="submit">
+          Atualizar informações
         </Button>
-      </VStack>
+      </Flex>
 
       <ConfirmModal
         title="ATENÇÃO"

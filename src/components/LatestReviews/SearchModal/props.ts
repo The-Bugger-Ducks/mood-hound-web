@@ -6,6 +6,7 @@ export default interface SearchModal {
   confirmButton: (
     topic?: CommentTopicEnum,
     dateStart?: Date,
-    dateEnd?: Date
+    dateEnd?: Date,
+    valueToSearch?: string
   ) => void;
 }

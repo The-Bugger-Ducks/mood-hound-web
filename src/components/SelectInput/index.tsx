@@ -26,7 +26,7 @@ const SelectInput: FC<SelectInputProps> = ({
 }) => {
   return (
     <FormControl
-      isRequired={isRequired ? isRequired : false}
+      isRequired={isRequired}
       isInvalid={invalidController ? invalidController.isInvalid : false}
     >
       {label && <FormLabel>{label}</FormLabel>}
@@ -36,8 +36,8 @@ const SelectInput: FC<SelectInputProps> = ({
           onChange={(event: ChangeEvent<HTMLSelectElement>) =>
             onChange ? onChange(event.target.value) : console.log(event)
           }
-          isRequired={isRequired ? isRequired : false}
-          placeholder={placeholder ? placeholder : "Selecione uma opção..."}
+          isRequired={isRequired}
+          placeholder={placeholder ?? "Selecione uma opção..."}
           disabled={isDisabled ?? false}
           defaultValue={defaultValue ?? ""}
           borderColor="gray.400"
@@ -45,8 +45,8 @@ const SelectInput: FC<SelectInputProps> = ({
           size={size ?? "lg"}
           value={value}
         >
-          {options.map((option, index) => (
-            <option value={option.value} key={index}>
+          {options.map((option) => (
+            <option value={option.value} key={option.id}>
               {option.label}
             </option>
           ))}

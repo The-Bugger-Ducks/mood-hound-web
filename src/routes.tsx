@@ -46,8 +46,6 @@ export default function Routes() {
 function Authenticated({ isPrivate }: { isPrivate: boolean }) {
   const { signedIn } = useAuth();
 
-  console.log(signedIn);
-
   if (!signedIn && isPrivate) {
     return <Navigate to={RoutesEnum.LOGIN} replace />;
   }

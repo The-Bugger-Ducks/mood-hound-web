@@ -2,9 +2,9 @@ import Routes from "./routes";
 import chakraTheme from "./assets/themes/chakra.theme";
 
 import { ChakraProvider } from "@chakra-ui/react";
-import { SearchProvides } from "./contexts/SearchContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { DashboardProvider } from "./contexts/DashboardContext";
 
 function App() {
   const queryClient = new QueryClient();
@@ -12,11 +12,11 @@ function App() {
   return (
     <ChakraProvider theme={chakraTheme}>
       <QueryClientProvider client={queryClient}>
-        <SearchProvides>
-          <AuthProvider>
+        <AuthProvider>
+          <DashboardProvider>
             <Routes />
-          </AuthProvider>
-        </SearchProvides>
+          </DashboardProvider>
+        </AuthProvider>
       </QueryClientProvider>
     </ChakraProvider>
   );

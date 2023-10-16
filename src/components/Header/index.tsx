@@ -1,49 +1,69 @@
 import logo from "../../assets/images/logo.svg";
 
-import TextOrEmailInput from "../TextOrEmailInput";
 import MenuWithIcon from "../MenuWithIcon";
 import RoutesEnum from "../../utils/enums/routes.enum";
+import ConfigureDashboardModal from "./ConfigureDashboardModal";
 
-import { FC, useContext, useState } from "react";
-import { MdLogout } from "react-icons/md";
-import { BsSearch, BsThreeDotsVertical } from "react-icons/bs";
-import { HStack, Image } from "@chakra-ui/react";
+import { FC } from "react";
+import { MdLogout, MdOutlineSettings } from "react-icons/md";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { Flex, Image, Spacer, useDisclosure } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../contexts/SearchContext";
 import { useAuth } from "../../hooks/useAuth";
+import { useDashboard } from "../../hooks/useDashboard";
+import { CommentTopicEnum } from "../../utils/enums/commentTopic.enum";
 
 const Header: FC = () => {
   const { signout } = useAuth();
+  const { setDateEnd, setDateStart, setState, setTopic } = useDashboard();
 
   const navigate = useNavigate();
-
-  const [valueToSearch, setValueToSearch] = useState("");
-  const searchOptions = useContext(SearchContext);
+  const configureDashboardModalController = useDisclosure();
 
   const options = [
-    { label: "Meu perfil", onClick: () => openMyProfile() },
-    { label: "Sair", onClick: () => signout(), iconConfig: { icon: MdLogout } },
+    { id: "myProfile", label: "Meu perfil", onClick: () => openMyProfile() },
+    {
+      id: "configureDashboard",
+      label: "Configurar dashboard",
+      onClick: () => configureDashboardModalController.onOpen(),
+      iconConfig: { icon: MdOutlineSettings },
+    },
+    {
+      id: "logout",
+      label: "Sair",
+      onClick: () => signout(),
+      iconConfig: { icon: MdLogout },
+    },
   ];
 
   const openMyProfile = () => {
     navigate(RoutesEnum.USER_UPDATE);
   };
 
-  const search = () => {
-    if (!searchOptions) return;
-    searchOptions.updateValueToSearch(valueToSearch);
+  const configureDashboard = (
+    topic?: CommentTopicEnum,
+    dateStart?: Date,
+    dateEnd?: Date,
+    state?: string
+  ) => {
+    setDateEnd(dateEnd);
+    setDateStart(dateStart);
+    setState(state);
+    setTopic(topic);
   };
 
   return (
-    <HStack position="sticky" zIndex={999} w="100%" top="0" spacing="1.5rem">
+    <Flex
+      position="sticky"
+      zIndex={999}
+      w="100%"
+      top="0"
+      p="2.5rem 0"
+      bg="gray.50"
+    >
       <Image src={logo} />
 
-      <TextOrEmailInput
-        iconLeftAddon={BsSearch}
-        placeholder="Pesquise por um comentário..."
-        onChange={setValueToSearch}
-        onEnter={search}
-      />
+      <Spacer />
 
       <MenuWithIcon
         mainIcon={{
@@ -53,7 +73,13 @@ const Header: FC = () => {
         }}
         options={options}
       />
-    </HStack>
+
+      <ConfigureDashboardModal
+        isOpen={configureDashboardModalController.isOpen}
+        onClose={configureDashboardModalController.onClose}
+        confirmButton={configureDashboard}
+      />
+    </Flex>
   );
 };
 

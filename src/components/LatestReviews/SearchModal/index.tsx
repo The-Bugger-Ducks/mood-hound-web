@@ -1,7 +1,11 @@
 import SearchModalProps from "./props";
 import SelectInput from "../../SelectInput";
+import DateInput from "../../DateInput";
+import TextOrEmailInput from "../../TextOrEmailInput";
 
 import { FC, useState } from "react";
+import { topicOptions } from "./constants";
+import { CommentTopicEnum } from "../../../utils/enums/commentTopic.enum";
 import {
   Box,
   Button,
@@ -15,9 +19,6 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { topicOptions } from "./constants";
-import { CommentTopicEnum } from "../../../utils/enums/commentTopic.enum";
-import DateInput from "../../DateInput";
 
 const SearchModal: FC<SearchModalProps> = ({
   isOpen,
@@ -25,6 +26,7 @@ const SearchModal: FC<SearchModalProps> = ({
   confirmButton,
 }) => {
   const [topic, setTopic] = useState<string | undefined>();
+  const [valueToSearch, setValueToSearch] = useState<string | undefined>();
   const [dateStart, setDateStart] = useState<Date | undefined>();
   const [dateEnd, setDateEnd] = useState<Date | undefined>();
 
@@ -43,7 +45,7 @@ const SearchModal: FC<SearchModalProps> = ({
 
   const confirm = () => {
     if (!isDatesValid()) return;
-    confirmButton(topic as CommentTopicEnum, dateStart, dateEnd);
+    confirmButton(topic as CommentTopicEnum, dateStart, dateEnd, valueToSearch);
     onClose();
   };
 
@@ -132,6 +134,12 @@ const SearchModal: FC<SearchModalProps> = ({
 
           <ModalBody>
             <VStack spacing="1.5rem">
+              <TextOrEmailInput
+                label="Avaliação"
+                onChange={setValueToSearch}
+                value={valueToSearch}
+              />
+
               <SelectInput
                 label="Tópico"
                 onChange={setTopic}

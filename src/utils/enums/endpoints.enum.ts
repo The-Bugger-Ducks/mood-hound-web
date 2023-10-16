@@ -7,6 +7,7 @@ enum EndpointsEnum {
   USER_GET_ME = "/users/me",
   COMMENT_GET_ALL = "/comments",
   AUTH_SIGNIN = "/auth/signin",
+  REVIEW_ANALYSIS = "/dashboard",
 }
 
 export default EndpointsEnum;

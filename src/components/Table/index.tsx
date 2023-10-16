@@ -36,6 +36,22 @@ const Table: FC<TableProps> = ({
 }) => {
   const [isLargerThan800h] = useMediaQuery("(min-height: 800px)");
 
+  const calculateMaxHeight = () => {
+    if (paginationController) {
+      if (maxHeight) {
+        return maxHeight.withPagination;
+      }
+
+      return isLargerThan800h ? "30rem" : "20rem";
+    }
+
+    if (maxHeight) {
+      return maxHeight.withoutPagination;
+    }
+
+    return isLargerThan800h ? "35rem" : "25rem";
+  };
+
   return (
     <ThemeProvider theme={muiTheme}>
       <ChakraProvider theme={chakraTheme}>
@@ -61,17 +77,7 @@ const Table: FC<TableProps> = ({
               },
             }}
             style={{
-              maxHeight: paginationController
-                ? maxHeight
-                  ? maxHeight.withPagination
-                  : isLargerThan800h
-                  ? "30rem"
-                  : "20rem"
-                : maxHeight
-                ? maxHeight.withPagination
-                : isLargerThan800h
-                ? "35rem"
-                : "25rem",
+              maxHeight: calculateMaxHeight(),
               marginBottom: "1rem",
             }}
           >
@@ -83,9 +89,9 @@ const Table: FC<TableProps> = ({
             >
               <TableHead>
                 <TableRow sx={{ tr: { border: 1, borderColor: "#E2E8F0" } }}>
-                  {header.cells.map((row, index) => (
+                  {header.cells.map((row) => (
                     <StyledTableCell
-                      key={"header" + index}
+                      key={row.id}
                       align={row.align ?? "left"}
                       sx={
                         withEllipsisInRows
@@ -148,14 +154,14 @@ const Table: FC<TableProps> = ({
                   </StyledTableRow>
                 )}
 
-                {rows.map((row, rowIndex) => (
+                {rows.map((row) => (
                   <StyledTableRow
-                    key={"row" + rowIndex}
+                    key={row.id}
                     sx={{ tr: { border: 1, borderColor: "#E2E8F0" } }}
                   >
-                    {row.cells.map((cell, cellIndex) => (
+                    {row.cells.map((cell) => (
                       <TableCell
-                        key={"row" + rowIndex + "cell" + cellIndex}
+                        key={`${row.id}_${cell.id}`}
                         sx={
                           withEllipsisInRows
                             ? {

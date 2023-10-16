@@ -12,5 +12,11 @@ export default interface SelectInputProps {
   };
   defaultValue?: string;
   value?: string;
-  options: { value: string; label: string }[];
+  options: InputOption[];
+}
+
+interface InputOption {
+  id: string | number;
+  value: string;
+  label: string;
 }

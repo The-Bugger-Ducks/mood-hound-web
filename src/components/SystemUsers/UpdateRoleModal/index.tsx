@@ -3,6 +3,7 @@ import SelectInput from "../../SelectInput";
 import UserRoleEnum from "../../../utils/enums/userRole.enum";
 
 import { FC, useState } from "react";
+import { userRoleOptions } from "./constants";
 import {
   Box,
   Button,
@@ -60,10 +61,7 @@ const UpdateRoleModal: FC<SearchModalProps> = ({
                   label="Indique o novo privilégio do usuário"
                   onChange={setRole}
                   isRequired={true}
-                  options={[
-                    { value: UserRoleEnum.ADMIN, label: "ADMIN" },
-                    { value: UserRoleEnum.VIEWER, label: "VIEWER" },
-                  ]}
+                  options={userRoleOptions}
                 />
               </VStack>
 

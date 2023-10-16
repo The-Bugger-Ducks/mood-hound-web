@@ -3,13 +3,13 @@ import moment from "moment";
 import queryCommentsProcessor from "../../utils/processors/queryComments.processor";
 import CommentInterface from "../../utils/interfaces/comment.interface";
 import SearchModal from "./SearchModal";
+import commentSentimentHandler from "../../utils/handlers/commentSentiment.handler";
 
-import { useSearch } from "../../hooks/useSearch";
 import { useEffect, useState } from "react";
 import { BiSlider } from "react-icons/bi";
 import { RowInterface } from "../Table/props";
 import { CommentTopicEnum } from "../../utils/enums/commentTopic.enum";
-import { lastReviewsTableHeader, takeReviewsTable } from "./constants";
+import { lastReviewsTableHeader, limitReviewsTable } from "./constants";
 
 import {
   Badge,
@@ -22,33 +22,31 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
-import commentSentimentHandler from "../../utils/handlers/commentSentiment.handler";
 
 export default function LatestReviews() {
   const toast = useToast();
   const searchModalController = useDisclosure();
 
-  const { valueToSearch } = useSearch();
-
   const [topic, setTopic] = useState<CommentTopicEnum | undefined>();
   const [dateStart, setDateStart] = useState<Date | undefined>();
   const [dateEnd, setDateEnd] = useState<Date | undefined>();
+  const [valueToSearch, setValueToSearch] = useState<string | undefined>();
 
-  const [cursor, setCursor] = useState<string | undefined>();
-  const [hasNextPage, setHasNextPage] = useState<boolean>(true);
-  const [hasPreviousPage, setHasPreviousPage] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [hasNextPage, setHasNextPage] = useState<boolean>();
+  const [hasPreviousPage, setHasPreviousPage] = useState<boolean>();
+
   const [lastReviewsTableRows, setLastReviewsTableRows] = useState<
     RowInterface[]
   >([]);
 
   const responseQueryCommentsProcessor = queryCommentsProcessor(
     {
-      take: takeReviewsTable,
-      cursor,
-      hasNextPage,
-      hasPreviousPage,
+      limit: limitReviewsTable,
+      page,
     },
-    { comment: valueToSearch, dateDone: dateEnd, dateStart: dateStart, topic }
+    { comment: valueToSearch, dateDone: dateEnd, dateStart: dateStart, topic },
+    { retry: false, refetchOnWindowFocus: false }
   );
 
   useEffect(() => {
@@ -57,7 +55,7 @@ export default function LatestReviews() {
 
   useEffect(() => {
     getComments();
-  }, [valueToSearch, topic, dateStart, dateEnd]);
+  }, [valueToSearch, topic, dateStart, dateEnd, page]);
 
   const getComments = async () => {
     const response = await responseQueryCommentsProcessor.refetch();
@@ -75,9 +73,8 @@ export default function LatestReviews() {
 
     const comments = response.data;
 
-    setCursor(comments.meta.cursor);
-    setHasNextPage(comments.meta.hasNextPage ?? true);
-    setHasPreviousPage(comments.meta.hasPreviousPage ?? false);
+    setHasNextPage(comments.meta.hasNextPage);
+    setHasPreviousPage(comments.meta.hasPreviousPage);
 
     refreshTable(comments.data);
   };
@@ -87,9 +84,15 @@ export default function LatestReviews() {
 
     newComments.forEach((newComment) => {
       newLastReviewsTableRows.push({
+        id: `header_${newComment.id}`,
         cells: [
-          { align: "left", element: moment(newComment.createdAt).format("l") },
           {
+            id: `date_${newComment.id}`,
+            align: "left",
+            element: moment(newComment.createdAt).format("DD/MM/YYYY"),
+          },
+          {
+            id: `theme_${newComment.id}`,
             align: "left",
             element: (
               <Badge
@@ -100,8 +103,9 @@ export default function LatestReviews() {
             ),
           },
           {
+            id: `description_${newComment.id}`,
             align: "left",
-            element: newComment.text,
+            element: <Text title={newComment.text}>{newComment.text}</Text>,
           },
         ],
       });
@@ -113,11 +117,14 @@ export default function LatestReviews() {
   const applyFilters = (
     newTopic?: CommentTopicEnum,
     newDateStart?: Date,
-    newDateEnd?: Date
+    newDateEnd?: Date,
+    newValueToSearch?: string
   ) => {
+    setPage(1);
     setTopic(newTopic);
     setDateStart(newDateStart);
     setDateEnd(newDateEnd);
+    setValueToSearch(newValueToSearch);
   };
 
   return (
@@ -156,7 +163,7 @@ export default function LatestReviews() {
               return;
             }
 
-            getComments();
+            setPage(page + 1);
           },
           onPreviousPage: () => {
             if (!hasPreviousPage) {
@@ -170,7 +177,7 @@ export default function LatestReviews() {
               return;
             }
 
-            getComments();
+            setPage(page - 1);
           },
         }}
       />

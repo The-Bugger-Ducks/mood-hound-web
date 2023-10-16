@@ -5,6 +5,18 @@ const chakraTheme = extendTheme({
     global: {
       "html, body, root": {
         bg: "gray.50",
+        "&::-webkit-scrollbar": {
+          width: 3,
+          height: 3,
+        },
+        "&::-webkit-scrollbar-track": {
+          width: 1,
+          height: 1,
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "#A8A8A8",
+          borderRadius: "1px",
+        },
       },
     },
   },
