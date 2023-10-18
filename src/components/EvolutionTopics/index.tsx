@@ -22,7 +22,7 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
     const newSeries = defaultConfiguration.series;
 
     data.forEach((informationToShow) => {
-      const date = moment(informationToShow.month).format("DD/MM/YYYY");
+      const date = moment.utc(informationToShow.month).format("MM/YYYY");
 
       newSeries.forEach((newSerie: any) => {
         if (newSerie.name == informationToShow.sentiment) {
