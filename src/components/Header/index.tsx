@@ -2,31 +2,45 @@ import logo from "../../assets/images/logo.svg";
 
 import MenuWithIcon from "../MenuWithIcon";
 import RoutesEnum from "../../utils/enums/routes.enum";
-import ConfigureDashboardModal from "./ConfigureDashboardModal";
 
 import { FC } from "react";
-import { MdLogout, MdOutlineSettings } from "react-icons/md";
+import { MdCalendarViewMonth, MdLogout, MdSearch } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Flex, Image, Spacer, useDisclosure } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
+import { Flex, Image, Spacer } from "@chakra-ui/react";
 import { useAuth } from "../../hooks/useAuth";
-import { useDashboard } from "../../hooks/useDashboard";
-import { CommentTopicEnum } from "../../utils/enums/commentTopic.enum";
+import { AiOutlineControl } from "react-icons/ai";
+import { BiUser } from "react-icons/bi";
+import { useNavigate } from "react-router";
 
 const Header: FC = () => {
   const { signout } = useAuth();
-  const { setDateEnd, setDateStart, setState, setTopic } = useDashboard();
 
   const navigate = useNavigate();
-  const configureDashboardModalController = useDisclosure();
 
   const options = [
-    { id: "myProfile", label: "Meu perfil", onClick: () => openMyProfile() },
     {
-      id: "configureDashboard",
-      label: "Configurar dashboard",
-      onClick: () => configureDashboardModalController.onOpen(),
-      iconConfig: { icon: MdOutlineSettings },
+      id: "overview",
+      label: "Visão geral",
+      onClick: () => console.log("oie"),
+      iconConfig: { icon: MdCalendarViewMonth },
+    },
+    {
+      id: "searchEngine",
+      label: "Motor de busca",
+      onClick: () => console.log("oie"),
+      iconConfig: { icon: MdSearch },
+    },
+    {
+      id: "system",
+      label: "Sistema",
+      onClick: () => console.log("oie"),
+      iconConfig: { icon: AiOutlineControl },
+    },
+    {
+      id: "myProfile",
+      label: "Meu perfil",
+      onClick: () => navigate(RoutesEnum.USER_UPDATE),
+      iconConfig: { icon: BiUser },
     },
     {
       id: "logout",
@@ -36,30 +50,15 @@ const Header: FC = () => {
     },
   ];
 
-  const openMyProfile = () => {
-    navigate(RoutesEnum.USER_UPDATE);
-  };
-
-  const configureDashboard = (
-    topic?: CommentTopicEnum,
-    dateStart?: Date,
-    dateEnd?: Date,
-    state?: string
-  ) => {
-    setDateEnd(dateEnd);
-    setDateStart(dateStart);
-    setState(state);
-    setTopic(topic);
-  };
-
   return (
     <Flex
       position="sticky"
       zIndex={999}
       w="100%"
       top="0"
-      p="2.5rem 0"
+      p="3rem 3rem 1.5rem 3rem"
       bg="gray.50"
+      display={["flex", "flex", "flex", "none", "none", "none"]}
     >
       <Image src={logo} />
 
@@ -72,12 +71,6 @@ const Header: FC = () => {
           color: "gray.600",
         }}
         options={options}
-      />
-
-      <ConfigureDashboardModal
-        isOpen={configureDashboardModalController.isOpen}
-        onClose={configureDashboardModalController.onClose}
-        confirmButton={configureDashboard}
       />
     </Flex>
   );

@@ -71,8 +71,9 @@ const Navbar: FC = () => {
   return (
     <Card
       position="fixed"
+      display={["none", "none", "none", "flex", "flex", "flex"]}
       zIndex={999}
-      w="15vw"
+      w={["0", "0", "0", "25vw", "20vw", "15vw"]}
       h="100vh"
       top="0"
       left="0"
