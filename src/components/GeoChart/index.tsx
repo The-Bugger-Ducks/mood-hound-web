@@ -10,7 +10,7 @@ const GeoChart: FC<GeoChartProps> = ({ data }) => {
     <Box p="0.5rem" bg="#FFF" borderRadius="1rem" border="1px solid #E2E8F0">
       <Chart
         chartType="GeoChart"
-        width="50%"
+        width="100%"
         height="400px"
         data={data}
         options={geoChartOption}

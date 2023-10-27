@@ -6,7 +6,7 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 
 const ReviewsByState: FC<ReviewsByStateProps> = ({ data }) => {
   return (
-    <Box m="2rem 0" p="0" bg="transparent" w="100%">
+    <Box p="0" bg="transparent" w="100%">
       <Flex>
         <Text variant="title">Avaliações por Estado</Text>
       </Flex>

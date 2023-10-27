@@ -21,19 +21,19 @@ const Header: FC = () => {
     {
       id: "overview",
       label: "Visão geral",
-      onClick: () => console.log("oie"),
+      onClick: () => navigate(RoutesEnum.OVERVIEW),
       iconConfig: { icon: MdCalendarViewMonth },
     },
     {
       id: "searchEngine",
       label: "Motor de busca",
-      onClick: () => console.log("oie"),
+      onClick: () => navigate(RoutesEnum.SEARCH_ENGINE),
       iconConfig: { icon: MdSearch },
     },
     {
       id: "system",
       label: "Sistema",
-      onClick: () => console.log("oie"),
+      onClick: () => navigate(RoutesEnum.SYSTEM),
       iconConfig: { icon: AiOutlineControl },
     },
     {

@@ -1,15 +1,15 @@
-import EvolutionTopics from "../../../components/EvolutionTopics";
-import LatestReviews from "../../../components/LatestReviews";
-import MostDiscussedTopics from "../../../components/MostDiscussedTopics";
-import ReviewsByState from "../../../components/ReviewsByState";
-import ReviewAnalysisInterface from "../../../utils/interfaces/reviewAnalysis.interface";
-import reviewAnalysisRequests from "../../../utils/requests/reviewAnalysis.requests";
+import EvolutionTopics from "../../components/EvolutionTopics";
+import LatestReviews from "../../components/LatestReviews";
+import MostDiscussedTopics from "../../components/MostDiscussedTopics";
+import ReviewsByState from "../../components/ReviewsByState";
+import ReviewAnalysisInterface from "../../utils/interfaces/reviewAnalysis.interface";
+import reviewAnalysisRequests from "../../utils/requests/reviewAnalysis.requests";
 
 import { useEffect, useState } from "react";
 import { Flex, useToast } from "@chakra-ui/react";
-import { useDashboard } from "../../../hooks/useDashboard";
+import { useDashboard } from "../../hooks/useDashboard";
 
-export default function ReviewAnalysis() {
+export default function Overview() {
   const toast = useToast();
   const { dateEnd, dateStart, state, topic } = useDashboard();
 
@@ -50,18 +50,13 @@ export default function ReviewAnalysis() {
   };
 
   return (
-    <>
-      <Flex
-        flexDirection={["column", "column", "row"]}
-        gap={["0", "0", "2rem"]}
-      >
+    <Flex flexDirection="column" gap="2rem">
+      <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
         <MostDiscussedTopics data={analysis.rankingOfTopics} />
         <EvolutionTopics data={analysis.timeSeriesDataTopic} />
       </Flex>
 
       <ReviewsByState data={analysis.commentsPerState} />
-
-      <LatestReviews />
-    </>
+    </Flex>
   );
 }
