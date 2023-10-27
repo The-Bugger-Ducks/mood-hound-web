@@ -1,6 +1,6 @@
 import { CommentTopicEnum } from "../../../utils/enums/commentTopic.enum";
 
-export default interface ConfigureDashboardProps {
+export default interface FilterProps {
   isOpen: boolean;
   onClose: () => void;
   confirmButton: (

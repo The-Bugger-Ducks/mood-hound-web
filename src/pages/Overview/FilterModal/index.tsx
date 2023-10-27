@@ -1,6 +1,6 @@
-import ConfigureDashboardProps from "./props";
-import SelectInput from "../../SelectInput";
-import DateInput from "../../DateInput";
+import FilterProps from "./props";
+import SelectInput from "../../../components/SelectInput";
+import DateInput from "../../../components/DateInput";
 
 import { FC, useState } from "react";
 import { stateOptions, topicOptions } from "./constants";
@@ -19,11 +19,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 
-const ConfigureDashboardModal: FC<ConfigureDashboardProps> = ({
-  isOpen,
-  onClose,
-  confirmButton,
-}) => {
+const FilterModal: FC<FilterProps> = ({ isOpen, onClose, confirmButton }) => {
   const [topic, setTopic] = useState<string | undefined>();
   const [state, setState] = useState<string | undefined>();
   const [dateStart, setDateStart] = useState<Date | undefined>();
@@ -184,4 +180,4 @@ const ConfigureDashboardModal: FC<ConfigureDashboardProps> = ({
   );
 };
 
-export default ConfigureDashboardModal;
+export default FilterModal;

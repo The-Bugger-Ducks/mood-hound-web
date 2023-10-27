@@ -1,17 +1,30 @@
 import EvolutionTopics from "../../components/EvolutionTopics";
-import LatestReviews from "../../components/LatestReviews";
 import MostDiscussedTopics from "../../components/MostDiscussedTopics";
 import ReviewsByState from "../../components/ReviewsByState";
 import ReviewAnalysisInterface from "../../utils/interfaces/reviewAnalysis.interface";
 import reviewAnalysisRequests from "../../utils/requests/reviewAnalysis.requests";
+import FilterModal from "./FilterModal";
 
 import { useEffect, useState } from "react";
-import { Flex, useToast } from "@chakra-ui/react";
-import { useDashboard } from "../../hooks/useDashboard";
+import { useOverview } from "../../hooks/useOverview";
+import { BiSlider } from "react-icons/bi";
+import { CommentTopicEnum } from "../../utils/enums/commentTopic.enum";
+import {
+  Button,
+  Flex,
+  Icon,
+  Spacer,
+  Text,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
 
 export default function Overview() {
   const toast = useToast();
-  const { dateEnd, dateStart, state, topic } = useDashboard();
+  const filterModalController = useDisclosure();
+
+  const { dateEnd, dateStart, state, topic } = useOverview();
+  const { setDateEnd, setDateStart, setState, setTopic } = useOverview();
 
   const [analysis, setAnalysis] = useState<ReviewAnalysisInterface>({
     rankingOfTopics: [],
@@ -49,14 +62,49 @@ export default function Overview() {
     setAnalysis(newAnalysis);
   };
 
+  const filterOverview = (
+    topic?: CommentTopicEnum,
+    dateStart?: Date,
+    dateEnd?: Date,
+    state?: string
+  ) => {
+    setDateEnd(dateEnd);
+    setDateStart(dateStart);
+    setState(state);
+    setTopic(topic);
+  };
   return (
-    <Flex flexDirection="column" gap="2rem">
-      <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
-        <MostDiscussedTopics data={analysis.rankingOfTopics} />
-        <EvolutionTopics data={analysis.timeSeriesDataTopic} />
+    <>
+      <Flex flexDirection="column" gap="2rem">
+        <Flex>
+          <Text variant="title">Visão geral</Text>
+
+          <Spacer />
+
+          <Button
+            size="sm"
+            variant="ghost"
+            color="teal.500"
+            leftIcon={<Icon as={BiSlider} />}
+            onClick={filterModalController.onOpen}
+          >
+            Filtrar
+          </Button>
+        </Flex>
+
+        <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
+          <MostDiscussedTopics data={analysis.rankingOfTopics} />
+          <EvolutionTopics data={analysis.timeSeriesDataTopic} />
+        </Flex>
+
+        <ReviewsByState data={analysis.commentsPerState} />
       </Flex>
 
-      <ReviewsByState data={analysis.commentsPerState} />
-    </Flex>
+      <FilterModal
+        isOpen={filterModalController.isOpen}
+        onClose={filterModalController.onClose}
+        confirmButton={filterOverview}
+      />
+    </>
   );
 }

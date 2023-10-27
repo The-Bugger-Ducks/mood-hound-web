@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-interface DashboardContextValue {
+interface OverviewContextValue {
   state?: string;
   setState: (newState?: string) => void;
 
@@ -14,16 +14,16 @@ interface DashboardContextValue {
   setDateEnd: (newDateEnd?: Date) => void;
 }
 
-export const DashboardContext = createContext({} as DashboardContextValue);
+export const OverviewContext = createContext({} as OverviewContextValue);
 
-export function DashboardProvider({ children }: { children: React.ReactNode }) {
+export function OverviewProvider({ children }: { children: React.ReactNode }) {
   const [topic, setTopic] = useState<string | undefined>();
   const [state, setState] = useState<string | undefined>();
   const [dateStart, setDateStart] = useState<Date | undefined>();
   const [dateEnd, setDateEnd] = useState<Date | undefined>();
 
   return (
-    <DashboardContext.Provider
+    <OverviewContext.Provider
       value={{
         setDateEnd,
         dateEnd,
@@ -39,6 +39,6 @@ export function DashboardProvider({ children }: { children: React.ReactNode }) {
       }}
     >
       {children}
-    </DashboardContext.Provider>
+    </OverviewContext.Provider>
   );
 }

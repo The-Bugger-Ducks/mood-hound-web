@@ -129,8 +129,8 @@ export default function LatestReviews() {
 
   return (
     <Box p="0" bg="transparent">
-      <Flex>
-        <Text variant="title">Últimas avaliações</Text>
+      <Flex mb="2rem">
+        <Text variant="title">Motor de busca</Text>
 
         <Spacer />
 

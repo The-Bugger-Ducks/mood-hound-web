@@ -199,7 +199,7 @@ export default function SystemUsers() {
 
   return (
     <Box p="0" bg="transparent">
-      <Flex>
+      <Flex mb="2rem">
         <Text variant="title">Usuários do sistema</Text>
 
         <Spacer />

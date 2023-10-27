@@ -8,7 +8,7 @@ const ReviewsByState: FC<ReviewsByStateProps> = ({ data }) => {
   return (
     <Box p="0" bg="transparent" w="100%">
       <Flex>
-        <Text variant="title">Avaliações por Estado</Text>
+        <Text variant="subtitle">Avaliações por Estado</Text>
       </Flex>
 
       <GeoChart data={data} />

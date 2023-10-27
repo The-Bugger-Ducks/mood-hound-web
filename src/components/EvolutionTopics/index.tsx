@@ -41,7 +41,7 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
   return (
     <Box p="0" bg="transparent" w="100%">
       <Flex>
-        <Text variant="title">Evolução dos temas</Text>
+        <Text variant="subtitle">Evolução dos temas</Text>
       </Flex>
 
       <Chart
