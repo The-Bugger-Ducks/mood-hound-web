@@ -1,12 +1,23 @@
-import { Flex } from "@chakra-ui/react";
-import Header from "../components/Header";
+import { Box } from "@chakra-ui/react";
 import { Outlet } from "react-router-dom";
+
+import Navbar from "../components/Navbar";
 
 export default function AuthenticatedLayout() {
   return (
-    <Flex flexDir="column" p="0 2.5rem" mb="2.5rem">
-      <Header />
-      <Outlet />
-    </Flex>
+    <Box w="100%">
+      <Navbar />
+
+      <Box
+        left="15vw"
+        w="85vw"
+        h="100vh"
+        position="fixed"
+        p="3rem"
+        overflow="auto"
+      >
+        <Outlet />
+      </Box>
+    </Box>
   );
 }

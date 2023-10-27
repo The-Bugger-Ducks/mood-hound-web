@@ -48,6 +48,17 @@ const chakraTheme = extendTheme({
           fontWeight: "bold",
           mb: "1.5rem",
         },
+
+        navbar_title: {
+          fontSize: "md",
+          color: "gray.300",
+          fontWeight: "semibold",
+          textTransform: "uppercase",
+        },
+
+        navbar_text: {
+          fontSize: "md",
+        },
       },
     },
   },
