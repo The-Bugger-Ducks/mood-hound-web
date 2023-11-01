@@ -6,10 +6,12 @@ import {
   Routes as RoutesDom,
 } from "react-router-dom";
 
-import Homepage from "./pages/Homepage";
 import Auth from "./pages/Auth";
 import UserRegistration from "./pages/UserRegistration";
 import UserUpdate from "./pages/UserUpdate";
+import Overview from "./pages/Overview";
+import System from "./pages/System";
+import SearchEngine from "./pages/SearchEngine";
 
 import RoutesEnum from "./utils/enums/routes.enum";
 
@@ -27,8 +29,12 @@ export default function Routes() {
 
         <Route element={<Authenticated isPrivate={true} />}>
           <Route element={<AuthenticatedLayout />}>
-            <Route path={"/"} element={<Homepage />} />
-            <Route path={RoutesEnum.DASHBOARD} element={<Homepage />} />
+            <Route path={"/"} element={<Overview />} />
+            <Route path={RoutesEnum.OVERVIEW} element={<Overview />} />
+
+            <Route path={RoutesEnum.SYSTEM} element={<System />} />
+
+            <Route path={RoutesEnum.SEARCH_ENGINE} element={<SearchEngine />} />
 
             <Route
               path={RoutesEnum.USER_REGISTRATION}

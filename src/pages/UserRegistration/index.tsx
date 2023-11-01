@@ -96,7 +96,7 @@ export default function UserRegistration() {
       isClosable: true,
     });
 
-    navigate(RoutesEnum.DASHBOARD);
+    navigate(RoutesEnum.SYSTEM);
   };
 
   const validateForm = () => {
@@ -147,7 +147,7 @@ export default function UserRegistration() {
   return (
     <form onSubmit={(event) => register(event)}>
       <HStack spacing="0.5rem" mb="1.5rem">
-        <Button variant="ghost" onClick={() => navigate(RoutesEnum.DASHBOARD)}>
+        <Button variant="ghost" onClick={() => navigate(RoutesEnum.SYSTEM)}>
           <Icon
             as={MdArrowBack}
             boxSize="1.5rem"
