@@ -6,11 +6,22 @@ export default interface ReviewAnalysisInterface {
   custumerAgeRange: CustumerAgeRangeInterface;
 }
 
-export interface RankingOfTopicsInterface
-  extends Array<{
-    value: number;
-    label: string;
-  }> {}
+export interface RankingOfTopicsInterface {
+  resume: {
+    total: number;
+    positive: number;
+    negative: number;
+    neutral: number;
+  };
+
+  topics: {
+    topic: string;
+    positive: number;
+    negative: number;
+    neutral: number;
+    total: number;
+  }[];
+}
 
 export interface TimeSeriesDataTopicInterface
   extends Array<{ month: string; sentiment: string; total: number }> {}

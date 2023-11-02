@@ -6,6 +6,7 @@ import ReviewsByState from "../../components/ReviewsByState";
 import ReviewAnalysisInterface from "../../utils/interfaces/reviewAnalysis.interface";
 import reviewAnalysisRequests from "../../utils/requests/reviewAnalysis.requests";
 import FilterModal from "./FilterModal";
+import ReviewsByTheme from "../../components/ReviewsByTheme";
 
 import { useEffect, useState } from "react";
 import { useOverview } from "../../hooks/useOverview";
@@ -29,7 +30,10 @@ export default function Overview() {
   const { setDateEnd, setDateStart, setState, setTopic } = useOverview();
 
   const [analysis, setAnalysis] = useState<ReviewAnalysisInterface>({
-    rankingOfTopics: [],
+    rankingOfTopics: {
+      resume: { negative: 0, neutral: 0, positive: 0, total: 0 },
+      topics: [],
+    },
     timeSeriesDataTopic: [],
     commentsPerState: [],
     custumerAgeRange: { labels: [], values: [] },
@@ -98,12 +102,12 @@ export default function Overview() {
 
         <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
           <CustumerGender data={analysis.custumerGender} />
-
           <AgeRange data={analysis.custumerAgeRange} />
         </Flex>
 
         <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
           <EvolutionTopics data={analysis.timeSeriesDataTopic} />
+          <ReviewsByTheme data={analysis.rankingOfTopics} />
         </Flex>
 
         <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
