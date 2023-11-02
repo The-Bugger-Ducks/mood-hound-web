@@ -1,5 +1,7 @@
 import EvolutionTopics from "../../components/EvolutionTopics";
 import MostDiscussedTopics from "../../components/MostDiscussedTopics";
+import AgeRange from "../../components/CustumerAgeRange";
+import CustumerGender from "../../components/CustumerGender";
 import ReviewsByState from "../../components/ReviewsByState";
 import ReviewAnalysisInterface from "../../utils/interfaces/reviewAnalysis.interface";
 import reviewAnalysisRequests from "../../utils/requests/reviewAnalysis.requests";
@@ -30,6 +32,8 @@ export default function Overview() {
     rankingOfTopics: [],
     timeSeriesDataTopic: [],
     commentsPerState: [],
+    custumerAgeRange: { labels: [], values: [] },
+    custumerGender: { labels: [], values: [] },
   });
 
   useEffect(() => {
@@ -93,11 +97,18 @@ export default function Overview() {
         </Flex>
 
         <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
-          <MostDiscussedTopics data={analysis.rankingOfTopics} />
+          <CustumerGender data={analysis.custumerGender} />
+
+          <AgeRange data={analysis.custumerAgeRange} />
+        </Flex>
+
+        <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
           <EvolutionTopics data={analysis.timeSeriesDataTopic} />
         </Flex>
 
-        <ReviewsByState data={analysis.commentsPerState} />
+        <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
+          <ReviewsByState data={analysis.commentsPerState} />
+        </Flex>
       </Flex>
 
       <FilterModal
