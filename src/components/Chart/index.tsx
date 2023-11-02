@@ -4,9 +4,21 @@ import ChartProps from "./props";
 import { FC } from "react";
 import { Box } from "@chakra-ui/react";
 
-const Chart: FC<ChartProps> = ({ options, series, type, height }) => {
+const Chart: FC<ChartProps> = ({
+  options,
+  series,
+  type,
+  height,
+  chakraBg,
+  chakraBorder,
+}) => {
   return (
-    <Box p="0.5rem" bg="#FFF" borderRadius="1rem" border="1px solid #E2E8F0">
+    <Box
+      p="0.5rem"
+      bg={chakraBg ?? "#FFF"}
+      borderRadius="1rem"
+      border={chakraBorder ?? "1px solid #E2E8F0"}
+    >
       <ReactApexChart
         options={options}
         series={series}
