@@ -21,6 +21,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import PositiveReviews from "../../components/PositiveReviews";
 
 export default function Overview() {
   const toast = useToast();
@@ -112,6 +113,7 @@ export default function Overview() {
 
         <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
           <PrevalenceOfThemes data={analysis.rankingOfTopics} />
+          <PositiveReviews data={analysis.rankingOfTopics} />
         </Flex>
 
         <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
