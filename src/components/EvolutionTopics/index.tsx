@@ -48,6 +48,7 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
         options={configuration.options}
         series={configuration.series}
         type="line"
+        height={330}
       />
     </Box>
   );

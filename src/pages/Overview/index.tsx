@@ -1,9 +1,12 @@
 import EvolutionTopics from "../../components/EvolutionTopics";
 import MostDiscussedTopics from "../../components/MostDiscussedTopics";
+import AgeRange from "../../components/CustumerAgeRange";
+import CustumerGender from "../../components/CustumerGender";
 import ReviewsByState from "../../components/ReviewsByState";
 import ReviewAnalysisInterface from "../../utils/interfaces/reviewAnalysis.interface";
 import reviewAnalysisRequests from "../../utils/requests/reviewAnalysis.requests";
 import FilterModal from "./FilterModal";
+import ReviewsByTheme from "../../components/ReviewsByTheme";
 
 import { useEffect, useState } from "react";
 import { useOverview } from "../../hooks/useOverview";
@@ -27,9 +30,14 @@ export default function Overview() {
   const { setDateEnd, setDateStart, setState, setTopic } = useOverview();
 
   const [analysis, setAnalysis] = useState<ReviewAnalysisInterface>({
-    rankingOfTopics: [],
+    rankingOfTopics: {
+      resume: { negative: 0, neutral: 0, positive: 0, total: 0 },
+      topics: [],
+    },
     timeSeriesDataTopic: [],
     commentsPerState: [],
+    custumerAgeRange: { labels: [], values: [] },
+    custumerGender: { labels: [], values: [] },
   });
 
   useEffect(() => {
@@ -93,11 +101,18 @@ export default function Overview() {
         </Flex>
 
         <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
-          <MostDiscussedTopics data={analysis.rankingOfTopics} />
-          <EvolutionTopics data={analysis.timeSeriesDataTopic} />
+          <CustumerGender data={analysis.custumerGender} />
+          <AgeRange data={analysis.custumerAgeRange} />
         </Flex>
 
-        <ReviewsByState data={analysis.commentsPerState} />
+        <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
+          <EvolutionTopics data={analysis.timeSeriesDataTopic} />
+          <ReviewsByTheme data={analysis.rankingOfTopics} />
+        </Flex>
+
+        <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
+          <ReviewsByState data={analysis.commentsPerState} />
+        </Flex>
       </Flex>
 
       <FilterModal
