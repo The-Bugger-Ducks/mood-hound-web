@@ -7,6 +7,7 @@ import ReviewAnalysisInterface from "../../utils/interfaces/reviewAnalysis.inter
 import reviewAnalysisRequests from "../../utils/requests/reviewAnalysis.requests";
 import FilterModal from "./FilterModal";
 import ReviewsByTheme from "../../components/ReviewsByTheme";
+import FeelingAnalysis from "../../components/FeelingAnalysis";
 
 import { useEffect, useState } from "react";
 import { useOverview } from "../../hooks/useOverview";
@@ -100,6 +101,8 @@ export default function Overview() {
             Filtrar
           </Button>
         </Flex>
+
+        <FeelingAnalysis data={analysis.rankingOfTopics} />
 
         <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
           <CustumerGender data={analysis.custumerGender} />
