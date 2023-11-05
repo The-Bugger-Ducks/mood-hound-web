@@ -2,6 +2,8 @@ export default interface ChartProps {
   options: ApexCharts.ApexOptions;
   series: ApexAxisChartSeries | ApexNonAxisChartSeries;
   height: number;
+  chakraBg?: string;
+  chakraBorder?: string;
   type:
     | "area"
     | "line"
