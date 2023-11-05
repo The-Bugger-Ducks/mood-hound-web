@@ -4,7 +4,6 @@ export default interface ChartProps {
   height: number;
   chakraBg?: string;
   chakraBorder?: string;
-
   type:
     | "area"
     | "line"
