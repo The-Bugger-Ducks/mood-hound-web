@@ -21,11 +21,16 @@ const PositiveReviews: FC<PrevalenceOfThemesProps> = ({ data }) => {
     const newSeries = defaultConfiguration.series;
 
     const total = data.resume.total
-    const positive = data.resume.positive
 
-    const percent = ((positive * 100) / total)
+    if (total == 0) {
+      newSeries.push(0)
+    } else {
+      const positive = data.resume.positive
 
-    newSeries.push(percent.toFixed(2))
+      const percent = ((positive * 100) / total)
+
+      newSeries.push(percent.toFixed(2))
+    }
 
     let newConfiguration = defaultConfiguration;
     newConfiguration.series = newSeries;
