@@ -2,6 +2,7 @@ import EvolutionTopics from "../../components/EvolutionTopics";
 import AgeRange from "../../components/CustumerAgeRange";
 import CustumerGender from "../../components/CustumerGender";
 import ReviewsByState from "../../components/ReviewsByState";
+import PrevalenceOfThemes from "../../components/PrevalenceOfThemes";
 import ReviewAnalysisInterface from "../../utils/interfaces/reviewAnalysis.interface";
 import reviewAnalysisRequests from "../../utils/requests/reviewAnalysis.requests";
 import FilterModal from "./FilterModal";
@@ -21,6 +22,7 @@ import {
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
+import PositiveReviews from "../../components/PositiveReviews";
 
 export default function Overview() {
   const toast = useToast();
@@ -110,6 +112,11 @@ export default function Overview() {
         <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
           <EvolutionTopics data={analysis.timeSeriesDataTopic} />
           <ReviewsByTheme data={analysis.rankingOfTopics} />
+        </Flex>
+
+        <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
+          <PrevalenceOfThemes data={analysis.rankingOfTopics} />
+          <PositiveReviews data={analysis.rankingOfTopics} />
         </Flex>
 
         <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>

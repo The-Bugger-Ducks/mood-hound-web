@@ -6,6 +6,14 @@ export default interface ReviewAnalysisInterface {
   custumerAgeRange: CustumerAgeRangeInterface;
 }
 
+export interface ReqReviewAnalysisInterface {
+  rankingOfTopics: RankingOfTopicsInterface;
+  timeSeriesDataTopic: TimeSeriesDataTopicInterface;
+  commentsPerState: CommentsPerStateInterface;
+  commentsPerGender: CustumerGenderInterface;
+  commentsPerAgeGroup: CustumerAgeRangeInterface;
+}
+
 export interface RankingOfTopicsInterface {
   resume: {
     total: number;
@@ -24,9 +32,9 @@ export interface RankingOfTopicsInterface {
 }
 
 export interface TimeSeriesDataTopicInterface
-  extends Array<{ month: string; sentiment: string; total: number }> {}
+  extends Array<{ month: string; sentiment: string; total: number }> { }
 
-export interface CommentsPerStateInterface extends Array<any[]> {}
+export interface CommentsPerStateInterface extends Array<any[]> { }
 
 export interface CustumerGenderInterface {
   values: number[];
