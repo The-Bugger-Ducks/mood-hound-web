@@ -1,7 +1,9 @@
 enum RoutesEnum {
   LOGIN = "/login",
 
-  DASHBOARD = "/dashboard",
+  SYSTEM = "/system",
+  OVERVIEW = "/overview",
+  SEARCH_ENGINE = "/search-engine",
   USER_REGISTRATION = "/user-registration",
   USER_UPDATE = "/user-update",
 }

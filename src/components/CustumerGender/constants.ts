@@ -1,25 +1,10 @@
-import CommentSentimentEnum from "../../utils/enums/commentSentiment.enum";
-
 export const defaultConfiguration: any = {
-  series: [
-    {
-      name: CommentSentimentEnum.POSITIVE,
-      data: [],
-    },
-    {
-      name: CommentSentimentEnum.NEGATIVE,
-      data: [],
-    },
-    {
-      name: CommentSentimentEnum.NEUTRAL,
-      data: [],
-    },
-  ],
+  series: [100, 100],
 
   options: {
     chart: {
       height: 350,
-      type: "line",
+      type: "pie",
       toolbar: {
         show: true,
         offsetX: 0,
@@ -36,11 +21,7 @@ export const defaultConfiguration: any = {
       },
     },
 
-    colors: ["#38A169", "#E53E3E", "#3182CE"],
-
-    dataLabels: {
-      enabled: false,
-    },
+    labels: ["Feminino", "Masculino"],
 
     grid: {
       borderColor: "#e7e7e7",
@@ -54,16 +35,10 @@ export const defaultConfiguration: any = {
       size: 0,
     },
 
-    xaxis: {
-      title: {
-        text: "Período",
-      },
-    },
-
-    yaxis: {
-      title: {
-        text: "Total de avaliações",
-      },
+    legend: {
+      position: "left",
+      offsetY: 0,
+      height: 230,
     },
   },
 };

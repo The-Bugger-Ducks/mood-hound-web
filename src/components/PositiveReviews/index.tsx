@@ -1,16 +1,15 @@
 import Chart from "../Chart";
-import EvolutionTopicsProps from "./props";
-import moment from "moment";
+import PrevalenceOfThemesProps from "./props";
 
 import { FC, useEffect, useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { defaultConfiguration } from "./constants";
 
-const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
+const PositiveReviews: FC<PrevalenceOfThemesProps> = ({ data }) => {
   const [configuration, setConfiguration] = useState(defaultConfiguration);
 
   useEffect(() => {
-    if (data.length) updateChart();
+    if (data) updateChart();
   }, [data]);
 
   const getDefaultConfiguration = () => {
@@ -21,15 +20,17 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
     const defaultConfiguration = getDefaultConfiguration();
     const newSeries = defaultConfiguration.series;
 
-    data.forEach((informationToShow) => {
-      const date = moment(informationToShow.month).format("DD/MM/YYYY");
+    const total = data.resume.total
 
-      newSeries.forEach((newSerie: any) => {
-        if (newSerie.name == informationToShow.sentiment) {
-          newSerie.data.push({ x: date, y: informationToShow.total });
-        }
-      });
-    });
+    if (total == 0) {
+      newSeries.push(0)
+    } else {
+      const positive = data.resume.positive
+
+      const percent = ((positive * 100) / total)
+
+      newSeries.push(percent.toFixed(2))
+    }
 
     let newConfiguration = defaultConfiguration;
     newConfiguration.series = newSeries;
@@ -39,19 +40,19 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
   };
 
   return (
-    <Box p="0" bg="transparent" w="100%">
+    <Box p="0" bg="transparent" w="100%" h="100%">
       <Flex>
-        <Text variant="subtitle">Evolução dos temas</Text>
+        <Text variant="subtitle">Porcentagem de avaliações positivas</Text>
       </Flex>
 
       <Chart
         options={configuration.options}
         series={configuration.series}
-        type="line"
-        height={330}
+        type="radialBar"
+        height={540}
       />
     </Box>
   );
 };
 
-export default EvolutionTopics;
+export default PositiveReviews;
