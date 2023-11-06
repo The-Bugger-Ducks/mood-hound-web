@@ -5,21 +5,21 @@ export default interface ChartProps {
   chakraBg?: string;
   chakraBorder?: string;
   type:
-    | "area"
-    | "line"
-    | "bar"
-    | "pie"
-    | "donut"
-    | "radialBar"
-    | "scatter"
-    | "bubble"
-    | "heatmap"
-    | "candlestick"
-    | "boxPlot"
-    | "radar"
-    | "polarArea"
-    | "rangeBar"
-    | "rangeArea"
-    | "treemap"
-    | undefined;
+  | "area"
+  | "line"
+  | "bar"
+  | "pie"
+  | "donut"
+  | "radialBar"
+  | "scatter"
+  | "bubble"
+  | "heatmap"
+  | "candlestick"
+  | "boxPlot"
+  | "radar"
+  | "polarArea"
+  | "rangeBar"
+  | "rangeArea"
+  | "treemap"
+  | undefined;
 }
