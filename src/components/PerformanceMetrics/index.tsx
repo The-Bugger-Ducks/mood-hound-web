@@ -1,5 +1,6 @@
 import TotalDocumentsProcessed from "../TotalDocumentsProcessed";
 import PerformanceMetricsInterface from "../../utils/interfaces/performanceMetrics.interface";
+import ErrorRate from "../ErrorRate";
 
 import { Box, Button, Flex, Icon, Spacer, Text } from "@chakra-ui/react";
 import { BiSlider } from "react-icons/bi";
@@ -7,6 +8,10 @@ import { BiSlider } from "react-icons/bi";
 export default function PerformanceMetrics() {
   const mock: PerformanceMetricsInterface = {
     totalDocumentsProcessed: 1,
+    errorRate: {
+      total: 1000,
+      errors: 300,
+    },
   };
 
   return (
@@ -29,6 +34,7 @@ export default function PerformanceMetrics() {
 
       <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
         <TotalDocumentsProcessed data={mock.totalDocumentsProcessed} />
+        <ErrorRate data={mock.errorRate} />
       </Flex>
     </Box>
   );
