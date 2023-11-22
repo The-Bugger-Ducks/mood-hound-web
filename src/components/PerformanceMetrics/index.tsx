@@ -4,6 +4,7 @@ import ErrorRate from "../ErrorRate";
 
 import { Box, Button, Flex, Icon, Spacer, Text } from "@chakra-ui/react";
 import { BiSlider } from "react-icons/bi";
+import DailyTotalProcessingTime from "../DailyTotalProcessingTime";
 
 export default function PerformanceMetrics() {
   const mock: PerformanceMetricsInterface = {
@@ -12,11 +13,15 @@ export default function PerformanceMetrics() {
       total: 1000,
       errors: 300,
     },
+    dailyTotalProcessingTime: [
+      { day: new Date().toString(), time: 45 },
+      { day: new Date(8.64e15).toString(), time: 80 },
+    ],
   };
 
   return (
-    <Box p="0" bg="transparent">
-      <Flex mb="2rem">
+    <Flex p="0" bg="transparent" flexDir={"column"} gap={"2rem"}>
+      <Flex>
         <Text variant="title">Métricas de desempenho do sistema</Text>
 
         <Spacer />
@@ -36,6 +41,10 @@ export default function PerformanceMetrics() {
         <TotalDocumentsProcessed data={mock.totalDocumentsProcessed} />
         <ErrorRate data={mock.errorRate} />
       </Flex>
-    </Box>
+
+      <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
+        <DailyTotalProcessingTime data={mock.dailyTotalProcessingTime} />
+      </Flex>
+    </Flex>
   );
 }
