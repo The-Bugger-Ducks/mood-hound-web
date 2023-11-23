@@ -4,6 +4,7 @@ export default interface PerformanceMetricsInterface {
   dailyTotalProcessingTime: DailyTotalProcessingTimeInterface;
   dailyTotalErrors: DailyTotalErrorsInterface;
   errorsByType: ErrorsByTypeInterface;
+  timeByPipelineStage: TimeByPipelineStageInterface;
 }
 
 export interface ErrorRateInterface {
@@ -16,6 +17,9 @@ export interface DailyTotalProcessingTimeInterface
 
 export interface DailyTotalErrorsInterface
   extends Array<{ day: string; errors: number }> {}
+
+export interface TimeByPipelineStageInterface
+  extends Array<{ stage: string; day: string; time: number }> {}
 
 export interface ErrorsByTypeInterface
   extends Array<{ type: string; errors: number }> {}

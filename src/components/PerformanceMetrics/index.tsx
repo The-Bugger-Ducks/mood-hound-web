@@ -4,6 +4,7 @@ import ErrorRate from "../ErrorRate";
 import DailyTotalProcessingTime from "../DailyTotalProcessingTime";
 import DailyTotalErrors from "../DailyTotalErrors";
 import ErrorsByType from "../ErrorsByType";
+import TimeByPipelineStage from "../TimeByPipelineStage";
 
 import { Button, Flex, Icon, Spacer, Text } from "@chakra-ui/react";
 import { BiSlider } from "react-icons/bi";
@@ -26,6 +27,12 @@ export default function PerformanceMetrics() {
     errorsByType: [
       { type: "Teste 01", errors: 12 },
       { type: "Teste 02", errors: 31 },
+    ],
+    timeByPipelineStage: [
+      { stage: "Etapa 01", day: new Date().toString(), time: 234 },
+      { stage: "Etapa 01", day: new Date(8.64e15).toString(), time: 100 },
+      { stage: "Etapa 02", day: new Date().toString(), time: 334 },
+      { stage: "Etapa 02", day: new Date(8.64e15).toString(), time: 50 },
     ],
   };
 
@@ -59,6 +66,10 @@ export default function PerformanceMetrics() {
       <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
         <DailyTotalErrors data={mock.dailyTotalErrors} />
         <ErrorsByType data={mock.errorsByType} />
+      </Flex>
+
+      <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
+        <TimeByPipelineStage data={mock.timeByPipelineStage} />
       </Flex>
     </Flex>
   );
