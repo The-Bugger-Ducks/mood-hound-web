@@ -3,6 +3,7 @@ import PerformanceMetricsInterface from "../../utils/interfaces/performanceMetri
 import ErrorRate from "../ErrorRate";
 import DailyTotalProcessingTime from "../DailyTotalProcessingTime";
 import DailyTotalErrors from "../DailyTotalErrors";
+import ErrorsByType from "../ErrorsByType";
 
 import { Button, Flex, Icon, Spacer, Text } from "@chakra-ui/react";
 import { BiSlider } from "react-icons/bi";
@@ -21,6 +22,10 @@ export default function PerformanceMetrics() {
     dailyTotalErrors: [
       { day: new Date().toString(), errors: 45 },
       { day: new Date(8.64e15).toString(), errors: 80 },
+    ],
+    errorsByType: [
+      { type: "Teste 01", errors: 12 },
+      { type: "Teste 02", errors: 31 },
     ],
   };
 
@@ -53,6 +58,7 @@ export default function PerformanceMetrics() {
 
       <Flex flexDirection={["column", "column", "row"]} gap={"2rem"}>
         <DailyTotalErrors data={mock.dailyTotalErrors} />
+        <ErrorsByType data={mock.errorsByType} />
       </Flex>
     </Flex>
   );
