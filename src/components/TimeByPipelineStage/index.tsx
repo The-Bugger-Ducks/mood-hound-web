@@ -1,6 +1,6 @@
+import moment from "moment";
 import Chart from "../Chart";
 import TimeByPipelineStageProps from "./props";
-import moment from "moment";
 
 import { FC, useEffect, useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
@@ -10,7 +10,7 @@ const TimeByPipelineStage: FC<TimeByPipelineStageProps> = ({ data }) => {
   const [configuration, setConfiguration] = useState(defaultConfiguration);
 
   useEffect(() => {
-    if (data.length) updateChart();
+    if (data?.length) updateChart();
   }, [data]);
 
   const getDefaultConfiguration = () => {

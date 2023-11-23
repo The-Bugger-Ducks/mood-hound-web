@@ -10,7 +10,7 @@ const DailyTotalErrors: FC<DailyTotalErrorsProps> = ({ data }) => {
   const [configuration, setConfiguration] = useState(defaultConfiguration);
 
   useEffect(() => {
-    if (data.length) updateChart();
+    if (data?.length) updateChart();
   }, [data]);
 
   const getDefaultConfiguration = () => {

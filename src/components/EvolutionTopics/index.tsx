@@ -10,7 +10,7 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
   const [configuration, setConfiguration] = useState(defaultConfiguration);
 
   useEffect(() => {
-    if (data.length) updateChart();
+    if (data?.length) updateChart();
   }, [data]);
 
   const getDefaultConfiguration = () => {
