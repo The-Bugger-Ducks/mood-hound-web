@@ -1,12 +1,14 @@
 import Chart from "../Chart";
-import EvolutionTopicsProps from "./props";
+import DailyTotalProcessingTimeProps from "./props";
 import moment from "moment";
 
 import { FC, useEffect, useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { defaultConfiguration } from "./constants";
 
-const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
+const DailyTotalProcessingTime: FC<DailyTotalProcessingTimeProps> = ({
+  data,
+}) => {
   const [configuration, setConfiguration] = useState(defaultConfiguration);
 
   useEffect(() => {
@@ -22,13 +24,9 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
     const newSeries = defaultConfiguration.series;
 
     data.forEach((informationToShow) => {
-      const date = moment(informationToShow.month).format("DD/MM/YYYY");
+      const date = moment(informationToShow.day).format("DD/MM/YYYY");
 
-      newSeries.forEach((newSerie: any) => {
-        if (newSerie.name == informationToShow.sentiment) {
-          newSerie.data.push({ x: date, y: informationToShow.total });
-        }
-      });
+      newSeries[0].data.push({ x: date, y: informationToShow.time });
     });
 
     let newConfiguration = defaultConfiguration;
@@ -41,7 +39,7 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
   return (
     <Box p="0" bg="transparent" w="100%">
       <Flex>
-        <Text variant="subtitle">Evolução dos temas</Text>
+        <Text variant="subtitle">Tempo de processamento total diário</Text>
       </Flex>
 
       <Chart
@@ -54,4 +52,4 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
   );
 };
 
-export default EvolutionTopics;
+export default DailyTotalProcessingTime;

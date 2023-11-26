@@ -1,12 +1,12 @@
-import Chart from "../Chart";
-import EvolutionTopicsProps from "./props";
 import moment from "moment";
+import Chart from "../Chart";
+import TimeByPipelineStageProps from "./props";
 
 import { FC, useEffect, useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { defaultConfiguration } from "./constants";
 
-const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
+const TimeByPipelineStage: FC<TimeByPipelineStageProps> = ({ data }) => {
   const [configuration, setConfiguration] = useState(defaultConfiguration);
 
   useEffect(() => {
@@ -22,13 +22,21 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
     const newSeries = defaultConfiguration.series;
 
     data.forEach((informationToShow) => {
-      const date = moment(informationToShow.month).format("DD/MM/YYYY");
+      const date = moment(informationToShow.day).format("DD/MM/YYYY");
 
-      newSeries.forEach((newSerie: any) => {
-        if (newSerie.name == informationToShow.sentiment) {
-          newSerie.data.push({ x: date, y: informationToShow.total });
-        }
-      });
+      const stageIndex = newSeries.findIndex(
+        (serie: any) => serie.name === informationToShow.stage
+      );
+
+      if (stageIndex < 0) {
+        const newSerie = {
+          name: informationToShow.stage,
+          data: [{ x: date, y: informationToShow.time }],
+        };
+        newSeries.push(newSerie);
+      } else {
+        newSeries[stageIndex].data.push({ x: date, y: informationToShow.time });
+      }
     });
 
     let newConfiguration = defaultConfiguration;
@@ -41,7 +49,7 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
   return (
     <Box p="0" bg="transparent" w="100%">
       <Flex>
-        <Text variant="subtitle">Evolução dos temas</Text>
+        <Text variant="subtitle">Tempo por etapa da pipeline</Text>
       </Flex>
 
       <Chart
@@ -54,4 +62,4 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
   );
 };
 
-export default EvolutionTopics;
+export default TimeByPipelineStage;

@@ -8,6 +8,7 @@ enum EndpointsEnum {
   COMMENT_GET_ALL = "/comments",
   AUTH_SIGNIN = "/auth/signin",
   REVIEW_ANALYSIS = "/dashboard",
+  PERFOMANCE_METRICS = "/performance-metrics",
 }
 
 export default EndpointsEnum;

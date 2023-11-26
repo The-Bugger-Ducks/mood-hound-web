@@ -1,12 +1,12 @@
 import Chart from "../Chart";
-import EvolutionTopicsProps from "./props";
+import DailyTotalErrorsProps from "./props";
 import moment from "moment";
 
 import { FC, useEffect, useState } from "react";
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { defaultConfiguration } from "./constants";
 
-const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
+const DailyTotalErrors: FC<DailyTotalErrorsProps> = ({ data }) => {
   const [configuration, setConfiguration] = useState(defaultConfiguration);
 
   useEffect(() => {
@@ -22,13 +22,9 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
     const newSeries = defaultConfiguration.series;
 
     data.forEach((informationToShow) => {
-      const date = moment(informationToShow.month).format("DD/MM/YYYY");
+      const date = moment(informationToShow.day).format("DD/MM/YYYY");
 
-      newSeries.forEach((newSerie: any) => {
-        if (newSerie.name == informationToShow.sentiment) {
-          newSerie.data.push({ x: date, y: informationToShow.total });
-        }
-      });
+      newSeries[0].data.push({ x: date, y: informationToShow.errors });
     });
 
     let newConfiguration = defaultConfiguration;
@@ -41,17 +37,17 @@ const EvolutionTopics: FC<EvolutionTopicsProps> = ({ data }) => {
   return (
     <Box p="0" bg="transparent" w="100%">
       <Flex>
-        <Text variant="subtitle">Evolução dos temas</Text>
+        <Text variant="subtitle">Erros diários</Text>
       </Flex>
 
       <Chart
         options={configuration.options}
         series={configuration.series}
-        type="line"
+        type="bar"
         height={330}
       />
     </Box>
   );
 };
 
-export default EvolutionTopics;
+export default DailyTotalErrors;
