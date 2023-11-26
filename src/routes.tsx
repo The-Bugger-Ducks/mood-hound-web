@@ -29,7 +29,7 @@ export default function Routes() {
 
         <Route element={<Authenticated isPrivate={true} />}>
           <Route element={<AuthenticatedLayout />}>
-            <Route path={"/"} element={<Overview />} />
+            <Route path={"/"} element={<SearchEngine />} />
             <Route path={RoutesEnum.OVERVIEW} element={<Overview />} />
 
             <Route path={RoutesEnum.SYSTEM} element={<System />} />

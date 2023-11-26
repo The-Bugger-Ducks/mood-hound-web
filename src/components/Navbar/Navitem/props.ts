@@ -7,6 +7,7 @@ export default interface NavitemProps {
   subitems: {
     id: string | number;
     title: string;
+    isVisible: boolean;
     icon: IconType;
     onClick: () => void;
   }[];

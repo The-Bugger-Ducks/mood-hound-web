@@ -11,6 +11,7 @@ const Navitem: FC<NavitemProps> = ({ subitems, title }) => {
       {subitems.map((subitem) => (
         <Flex
           key={subitem.id}
+          display={subitem.isVisible ? "flex" : "none"}
           gap="0.5rem"
           alignItems="center"
           cursor="pointer"
